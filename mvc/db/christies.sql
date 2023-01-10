@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-01-2023 a las 17:47:43
+-- Tiempo de generación: 10-01-2023 a las 20:49:31
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -30,7 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `categoria` (
   `id_cat` int(11) NOT NULL,
   `nombre` varchar(64) NOT NULL,
-  `descripcion` varchar(300) NOT NULL
+  `descripcion` varchar(300) NOT NULL,
+  `img` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -69,9 +70,9 @@ CREATE TABLE `compras` (
 CREATE TABLE `objeto` (
   `id_objeto` int(11) NOT NULL,
   `nombre` varchar(64) NOT NULL,
-  `lat` decimal(20,0) NOT NULL,
-  `lon` decimal(20,0) NOT NULL,
-  `precio` decimal(20,0) NOT NULL,
+  `lat` decimal(20,20) NOT NULL,
+  `lon` decimal(20,20) NOT NULL,
+  `precio` decimal(64,4) NOT NULL,
   `img1` varchar(255) NOT NULL,
   `img2` varchar(255) DEFAULT NULL,
   `img3` varchar(255) DEFAULT NULL,
@@ -89,7 +90,7 @@ CREATE TABLE `usuario` (
   `email` varchar(64) NOT NULL,
   `password` varchar(255) NOT NULL,
   `rol` enum('admin','user') NOT NULL,
-  `tokens` decimal(20,0) NOT NULL,
+  `tokens` decimal(64,4) NOT NULL,
   `telf` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
