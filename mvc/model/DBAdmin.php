@@ -9,7 +9,7 @@ class DBAdmin
         try {
             $check = false;
             $stmt = $db->prepare("SELECT * FROM user WHERE email = ? and password = ? and rol='admin'");
-            $stmt->execute([$email, $password]);
+            $stmt->execute([$email, sha1($password)]);
             $email = $stmt->fetch();
             if ($email) {
                 $check = true;

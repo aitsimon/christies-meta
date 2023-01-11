@@ -1,4 +1,6 @@
 .success{
     color: springgreen;
-
+}
+.error-msg{
+    color: #fc4242 !important;
 }
