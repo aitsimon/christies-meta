@@ -8,25 +8,25 @@
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../frontend/proyecto/admin/adminlte/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../../repositories/adminlte/plugins/fontawesome-free/css/all.min.css">
   <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="../../frontend/proyecto/admin/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="../../repositories/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../frontend/proyecto/admin/adminlte/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../repositories/adminlte/dist/css/adminlte.min.css">
   <!-- Custom style -->
-  <link rel="stylesheet" href="../../frontend/proyecto/admin/custom.css">
+  <link rel="stylesheet" href="../../repositories/custom-views/custom.css">
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Admin</b>LTE</a>
+    <a href="../../../index2.html"><b>Admin</b>LTE</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form  action="../../index3.html" method="post" id="quickForm">
+      <form  action="login/process" method="post" id="quickForm">
         <div class="input-group mb-3">
           <input type="email" id="emailI" name="email" class="form-control" placeholder="Email" required>
           <div class="input-group-append">
@@ -60,7 +60,7 @@
         </div>
       </form>
       <p class="mb-1">
-        <a href="forgot-password-v2.html">I forgot my password</a>
+        <a href="forgot-password-v2.php">I forgot my password</a>
       </p>
     </div>
     <!-- /.login-card-body -->
@@ -69,25 +69,24 @@
 <!-- /.login-box -->
 
 <!-- jQuery -->
-<script src="../../frontend/proyecto/admin/adminlte/plugins/jquery/jquery.min.js"></script>
+<script src="../../repositories/adminlte/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../../frontend/proyecto/admin/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../repositories/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../frontend/proyecto/admin/adminlte/dist/js/adminlte.min.js"></script>
+<script src="../../repositories/adminlte/dist/js/adminlte.min.js"></script>
 <!-- jquery-validation -->
-<script src="../../frontend/proyecto/admin/adminlte/plugins/jquery-validation/jquery.validate.min.js"></script>
-<script src="../../frontend/proyecto/admin/adminlte/plugins/jquery-validation/additional-methods.min.js"></script>
+<script src="../../repositories/adminlte/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="../../repositories/adminlte/plugins/jquery-validation/additional-methods.min.js"></script>
 <script>
   $(function () {
     $.validator.setDefaults({
-
       submitHandler: function () {
-        alert( "Form successful submitted!" );
+        $('#quickForm').submit();
       }
     });
     $('#quickForm').validate({
       success: function(label) {
-        label.addClass("success").text("Correct entry!")
+
       },
       rules: {
         email: {
