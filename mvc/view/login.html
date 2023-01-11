@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="../../frontend/proyecto/admin/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../frontend/proyecto/admin/adminlte/dist/css/adminlte.min.css">
+  <!-- Custom style -->
+  <link rel="stylesheet" href="../../frontend/proyecto/admin/custom.css">
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -26,16 +28,15 @@
 
       <form  action="../../index3.html" method="post" id="quickForm">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" required>
+          <input type="email" id="emailI" name="email" class="form-control" placeholder="Email" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
-              <span class="spnerror"></span>
             </div>
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" required>
+          <input type="password" name="password" class="form-control" placeholder="Password" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -79,18 +80,24 @@
 <script>
   $(function () {
     $.validator.setDefaults({
+
       submitHandler: function () {
         alert( "Form successful submitted!" );
       }
     });
     $('#quickForm').validate({
+      success: function(label) {
+        label.addClass("success").text("Correct entry!")
+      },
       rules: {
         email: {
           required: true,
+          pattern:"^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,3})$",
           email: true,
         },
         password: {
           required: true,
+          pattern:"^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$",
           minlength: 5
         },
         terms: {
