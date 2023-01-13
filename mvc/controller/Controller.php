@@ -2,6 +2,9 @@
 
 class Controller
 {
+    public function load_view($content,$template,$info){
+        require($template);
+    }
     public function showLogin()
     {
         require('view/back/login.php');
@@ -30,10 +33,12 @@ class Controller
     }
     public function showDashboardHome(){
         require ('model/session-control.php');
-        require ('view/back/dashboard-home.php');
+        $this->load_view('view/back/dashboard-home2.php','view/back/template.php','');
+        //require ('view/back/dashboard-home.php');
     }
     public function showDashboardCategories(){
         require ('model/session-control.php');
-        require ('view/back/categories.php');
+        $this->load_view('view/back/categoriesv2.php','view/back/template.php',"");
     }
+
 }

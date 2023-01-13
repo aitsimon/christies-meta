@@ -33,10 +33,10 @@ if (isset($array_path[0]) && $array_path[0] == 'admin' && $array_path[1] == 'log
 } else if ($array_path[1] == 'dashboard' && isset($array_path[2])) {
     if ($array_path[2] == 'categories') {
         $controller->showDashboardCategories();
-    } else if ($array_path[2] == 'objects') {
-
+    } else if ($array_path[2] == 'products') {
+        $controller->showDashboardProducts();
     } else if ($array_path[2] == 'users') {
-
+        $controller->showDashboardUsers();
     }else if ($array_path[2] == 'logout'){
         $controller->dashboardLogout();
     }
