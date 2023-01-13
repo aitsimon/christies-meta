@@ -7,7 +7,7 @@ class Controller
     }
     public function showLogin()
     {
-        require('view/back/login.php');
+        require('view/login.php');
     }
     public function processLogin(){
         if(isset($_POST['email'])&&isset($_POST['password'])){
@@ -33,12 +33,21 @@ class Controller
     }
     public function showDashboardHome(){
         require ('model/session-control.php');
-        $this->load_view('view/back/dashboard-home2.php','view/back/template.php','');
-        //require ('view/back/dashboard-home.php');
+        $info2 = array();
+        $info2['title']='Dashboard';
+        $this->load_view('view/dashboard-home2.php','view/template.php',$info2);
+        //require ('view/dashboard-home.php');
     }
     public function showDashboardCategories(){
         require ('model/session-control.php');
-        $this->load_view('view/back/categoriesv2.php','view/back/template.php',"");
+        $info2 = array();
+        $info2['title']='Categories';
+        $this->load_view('view/categoriesv2.php','view/template.php',$info2);
+    }
+    public function show404Page(){
+        $info2=array();
+        $info2['title'] = '404 page';
+        $this->load_view('view/404.php','view/template.php',$info2);
     }
 
 }

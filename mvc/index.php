@@ -42,6 +42,6 @@ if (isset($array_path[0]) && $array_path[0] == 'admin' && $array_path[1] == 'log
     }
 } else {
     //por defecto sino pone nada mas que index.php o index.php/ entrar front
-    $front_controller->showHome();
+    $controller->show404Page();
 }
 ?>
