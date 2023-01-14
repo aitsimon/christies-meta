@@ -44,10 +44,43 @@ class Controller
         $info2['title']='Categories';
         $this->load_view('view/categoriesv2.php','view/template.php',$info2);
     }
+    public function showDashboardProducts(){
+        require ('model/session-control.php');
+        $info2 = array();
+        $info2['title']='Products';
+        $this->load_view('view/products.php','view/template.php',$info2);
+    }
+    public function showDashboardUsers(){
+        require ('model/session-control.php');
+        $info2 = array();
+        $info2['title']='Users';
+        $this->load_view('view/users.php','view/template.php',$info2);
+    }
+    public function showDashboardPurchases(){
+        require ('model/session-control.php');
+        $info2 = array();
+        $info2['title']='Purchases';
+        $this->load_view('view/purchases.php','view/template.php',$info2);
+    }
+    public function showDashboardComments(){
+        require ('model/session-control.php');
+        $info2 = array();
+        $info2['title']='Comments';
+        $this->load_view('view/comments.php','view/template.php',$info2);
+    }
+    public function showDashboardContactForms(){
+        require ('model/session-control.php');
+        $info2 = array();
+        $info2['title']='Contact Form';
+        $this->load_view('view/contact-forms.php','view/template.php',$info2);
+    }
     public function show404Page(){
         $info2=array();
         $info2['title'] = '404 page';
         $this->load_view('view/404.php','view/template.php',$info2);
+    }
+    public function testing(){
+        require ('view/testing.php');
     }
 
 }

@@ -13,7 +13,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="./dashboard" class="brand-link">
-        <img src="../../view/back/media/logos/logof4-3.png" alt="AdminLTE Logo"
+        <img src="../../view/media/logos/logof4-3.png" alt="AdminLTE Logo"
              class="brand-image img-circle elevation-3">
         <span class="brand-text font-weight-light">Admin Dashboard</span>
     </a>
