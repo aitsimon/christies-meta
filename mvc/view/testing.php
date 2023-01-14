@@ -1,8 +1,7 @@
 <?php
-include 'model/DBManagerCategories.php';
-$gestor = new DBManagerCategories();
-$categories = $gestor->getAllCategories();
-var_dump($categories);
+include 'model/DBManagerComments.php';
+$gestor = new DBManagerComments();
+$gestor->deleteComment(1);
+$comments = $gestor->getAllComments();
+var_dump($comments);
 echo "<br><hr><br>";
-echo $gestor->insertCategory(4,'test','test','test');
-var_dump($categories);
