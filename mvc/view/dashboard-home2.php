@@ -1,4 +1,4 @@
-
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
@@ -164,6 +164,8 @@
             <!-- /.row (main row) -->
         </div><!-- /.container-fluid -->
     </section>
+<script src="../../view/admin/dist/js/pages/dashboard.js"></script>
+
     <!-- /.content -->
 
 
