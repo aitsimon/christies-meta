@@ -7,7 +7,7 @@ class DBManagerObject
     /**
      * @return array of all the objects/virtual-objects in the database
      */
-    public function getAllComments()
+    public function getAll()
     {
         $dbm = Connection::access();
         try {

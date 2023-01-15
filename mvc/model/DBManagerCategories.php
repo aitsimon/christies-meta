@@ -7,7 +7,7 @@ class DBManagerCategories
     /**
      * @return array of all the categories in the database
      */
-    public function getAllCategories()
+    public function getAll(): array
     {
         $dbm = Connection::access();
         try {

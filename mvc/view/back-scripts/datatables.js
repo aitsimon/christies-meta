@@ -9,9 +9,8 @@ $(document).ready(function() {
         "columnsDefs":[
             {
                 "targets":[0,3,4],
-                "orderable":false,
+                "orderable":true,
             }
         ]
-
     })
 })

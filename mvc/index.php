@@ -4,6 +4,11 @@ session_start();
 require("./controller/Controller.php");
 require("./controller/FrontController.php");
 require("./model/DBAdmin.php");
+require ('./model/DBManagerUsers.php');
+require ('./model/DBManagerCategories.php');
+require ('./model/DBManagerComments.php');
+require ('./model/DBManagerObject.php');
+require ('./model/DBManagerPurchases.php');
 //Instancio el controlador
 $controller = new Controller();
 $front_controller = new FrontController();
@@ -47,6 +52,8 @@ if (isset($array_path[0]) && $array_path[0] === 'admin' && $array_path[1] === 'l
         $controller->dashboardLogout();
     }else if($array_path[2] === 'testing'){
         $controller->testing();
+    }else if($array_path[2] === 'test'){
+        $controller->test();
     }
 } else {
     //por defecto sino pone nada mas que index.php o index.php/ entrar front

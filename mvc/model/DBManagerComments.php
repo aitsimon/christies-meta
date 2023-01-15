@@ -8,7 +8,7 @@ class DBManagerComments
     /**
      * @return array of all the comments in the database
      */
-    public function getAllComments()
+    public function getAll()
     {
         $dbm = Connection::access();
         try {

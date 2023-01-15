@@ -80,7 +80,10 @@ class Controller
         $this->load_view('view/404.php','view/template.php',$info2);
     }
     public function testing(){
-        $this->load_view();
+        require ('view/testing.php');
+    }
+    public function test(){
+        require ('view/test.php');
     }
 
 }

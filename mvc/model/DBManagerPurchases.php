@@ -7,7 +7,7 @@ class DBManagerPurchases
     /**
      * @return array of all the purchases in the database
      */
-    public function getAllPurchases()
+    public function getAll()
     {
         $dbm = Connection::access();
         try {

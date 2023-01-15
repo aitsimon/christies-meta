@@ -124,5 +124,5 @@ class DBManagerUsers
             return $check;
         }
     }
-    ////////////////////////////////
+
 }
