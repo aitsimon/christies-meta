@@ -1,12 +1,12 @@
 <?php
-$action = '';
-//$db =new DBManagerUsers();
-if(isset($_SESSION['action'])){
-    $action = $_SESSION['action'];
-}
-if($action==='update'){
-
-}
+//$action = '';
+////$db =new DBManagerUsers();
+//if(isset($_SESSION['action'])){
+//    $action = $_SESSION['action'];
+//}
+//if($action==='update'){
+//
+//}
 
 $table = 'user';
 $primaryKey = 'user_id';
