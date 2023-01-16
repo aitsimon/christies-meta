@@ -1,4 +1,13 @@
 <?php
+$action = '';
+//$db =new DBManagerUsers();
+if(isset($_SESSION['action'])){
+    $action = $_SESSION['action'];
+}
+if($action==='update'){
+
+}
+
 $table = 'user';
 $primaryKey = 'user_id';
 $columns = array(
@@ -16,7 +25,8 @@ $sql_details = array(
     'db' => 'christies',
     'host' => 'localhost'
 );
-require('../model/ssp.class.php');
+require('../../model/ssp.class.php');
 echo json_encode(
     SSP::simple($_POST, $sql_details, $table, $primaryKey, $columns)
 );
+?>

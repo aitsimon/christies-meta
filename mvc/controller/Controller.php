@@ -82,8 +82,4 @@ class Controller
     public function testing(){
         require ('view/testing.php');
     }
-    public function test(){
-        require ('view/test.php');
-    }
-
 }
