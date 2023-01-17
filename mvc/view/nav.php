@@ -38,7 +38,7 @@
                      with font-awesome or any other icon font library -->
                 <li class="nav-item">
                     <a href="./../../index.php/admin/dashboard" class="nav-link">
-                        <i class="nav-icon fas fa-gamepad"></i>
+                        <i class="nav-icon fas fa-gamepad "></i>
                         <p>
                             Dashboard
                         </p>

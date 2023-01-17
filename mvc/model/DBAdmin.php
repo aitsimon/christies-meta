@@ -22,7 +22,7 @@ class DBAdmin
         }
     }
 
-    public function getColumns($table)
+    public static function getColumns($table)
     {
         $db = Connection::access();
         try {

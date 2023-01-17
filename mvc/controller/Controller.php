@@ -53,10 +53,9 @@ class Controller
     public function showDashboardUsers(){
         require ('model/session-control.php');
         $info2 = array();
-        $info2['titulo']='user';
+        $_SESSION['table-used']='user';
         $info2['title']='Users';
-        $info2['table']='user';
-        $this->load_view('view/users.php','view/template.php',$info2);
+        $this->load_view('view/users2.php','view/template.php',$info2);
     }
     public function showDashboardPurchases(){
         require ('model/session-control.php');

@@ -1,12 +1,17 @@
 <?php
 include_once '../../model/DBAdmin.php';
-header('Content-Type: application/json');
-$db = new DBAdmin();
 $table = $_POST['table-used'];
-$columnas = $db->getColumns($table);
-$a = array();
-for ($i = 0; $i<count($columnas); $i++) {
-    array_push($a, $columnas[$i]);
+$columns = DBAdmin::getColumns($table);
+
+$json = [];
+for ($i = 0, $iMax = count($columns); $i < $iMax; $i++) {
+    $array['data'] = $columns[$i];
+    $array['title'] =$columns[$i];
+    $json['columns'][] = $array;
 }
-$array['data']=$a;
-echo json_encode($array);
+
+try {
+    echo json_encode($json, JSON_THROW_ON_ERROR);
+} catch (JsonException $e) {
+    echo "Error " . $e->getMessage();
+}
