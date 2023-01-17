@@ -42,11 +42,13 @@ class Controller
         require ('model/session-control.php');
         $info2 = array();
         $info2['title']='Categories';
-        $this->load_view('view/categoriesv2.php','view/template.php',$info2);
+        $_SESSION['table-used']='categories';
+        $this->load_view('view/categories.php','view/template.php',$info2);
     }
     public function showDashboardProducts(){
         require ('model/session-control.php');
         $info2 = array();
+        $_SESSION['table-used']='object';
         $info2['title']='Products';
         $this->load_view('view/products.php','view/template.php',$info2);
     }
@@ -55,17 +57,19 @@ class Controller
         $info2 = array();
         $_SESSION['table-used']='user';
         $info2['title']='Users';
-        $this->load_view('view/users2.php','view/template.php',$info2);
+        $this->load_view('view/users.php','view/template.php',$info2);
     }
     public function showDashboardPurchases(){
         require ('model/session-control.php');
         $info2 = array();
+        $_SESSION['table-used']='purchases';
         $info2['title']='Purchases';
         $this->load_view('view/purchases.php','view/template.php',$info2);
     }
     public function showDashboardComments(){
         require ('model/session-control.php');
         $info2 = array();
+        $_SESSION['table-used']='comments';
         $info2['title']='Comments';
         $this->load_view('view/comments.php','view/template.php',$info2);
     }

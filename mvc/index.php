@@ -3,6 +3,7 @@ session_start();
 //Incluyo los archivos necesarios
 require("./controller/Controller.php");
 require("./controller/FrontController.php");
+require("./controller/UserController.php");
 require("./model/DBAdmin.php");
 require ('./model/DBManagerUsers.php');
 require ('./model/DBManagerCategories.php');
@@ -12,6 +13,7 @@ require ('./model/DBManagerPurchases.php');
 //Instancio el controlador
 $controller = new Controller();
 $front_controller = new FrontController();
+$user_controller = new UserController();
 
 //Ruta de la home
 $home = "/christies-meta/mvc/index.php/";
@@ -41,7 +43,11 @@ if (isset($array_path[0]) && $array_path[0] === 'admin' && $array_path[1] === 'l
     } else if ($array_path[2] === 'products') {
         $controller->showDashboardProducts();
     } else if ($array_path[2] === 'users') {
-        $controller->showDashboardUsers();
+        if(!isset($array_path[3])){
+            $controller->showDashboardUsers();
+        }else{
+            $user_controller->viewUser($array_path[3]);
+        }
     }else if($array_path[2] === 'purchases') {
         $controller->showDashboardPurchases();
     }else if($array_path[2] === 'comments'){

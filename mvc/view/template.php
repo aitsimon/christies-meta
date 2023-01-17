@@ -2,7 +2,7 @@
 
 $url = '';
 if(!isset($_SERVER['HTTP_REFERER'])) {
-    $_SERVER['HTTP_REFERER']='http://localhost/christies/mvc/admin';
+    $_SERVER['HTTP_REFERER']='http://localhost/christies-meta/mvc/admin';
 }
 $component = explode('/', $_SERVER['HTTP_REFERER']);
 for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {

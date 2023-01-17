@@ -9,16 +9,18 @@ $.ajax({
 }).done((response) => {
     let stringdefault = JSON.stringify({
         data: null,
-        className: "dt-center ",
+        className: "dt-center",
         title: 'Erase',
-        defaultContent: '<i class="fas fa-recycle deletee-btn"></i>',
+        defaultContent: '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">\n' +
+            '<i class="fas fa-trash deletee-btn" style="cursor:pointer;"></i></button>',
         orderable: false
     });
     let stringdefault2 = JSON.stringify({
         data: null,
         title: 'Edit',
-        className: "dt-center edit-btn",
-        defaultContent: '<i class="fas fa-pen"></i>',
+        className: "dt-center ",
+        defaultContent: '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">\n' +
+            '<i class="fas fa-pen" style="cursor:pointer;"></i></button>',
         orderable: false
     });
     let receivedString = JSON.stringify(response);
@@ -44,8 +46,18 @@ $.ajax({
             },
             columns: JSON.parse(lastJson).columns,
         });
+       let btnDelete = document.getElementsByClassName('deletee-btn');
+       console.log(btnDelete);
+        for (let k = 0; k < btnDelete.length; k++) {
+            btnDelete[k].addEventListener('click',openModal);
+        }
         function openModal(e){
             let element = e.target;
+            if(element.classList.contains('deletee-btn')){
+
+            }else{
+
+            }
 
         }
     });
