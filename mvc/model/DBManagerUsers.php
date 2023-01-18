@@ -92,7 +92,7 @@ class DBManagerUsers
             $check = false;
             $clause = "UPDATE user SET password = ?, rol = ?, tokens = ?, telph = ?  WHERE user_id = ?";
             $stmt = $dbm->prepare($clause);
-            if ($stmt->execute([$password, $rol, $tokens, $telph, $user_id])) {
+            if ($stmt->execute([sha1($password), $rol, $tokens, $telph, $user_id])) {
                 $check = true;
             }
         } catch (PDOException $e) {
@@ -107,14 +107,14 @@ class DBManagerUsers
      * @param $user_id int Id of the user to be deleted
      * @return bool true if the user is deleted, false otherwise
      */
-    public static function deleteUser($user_email)
+    public static function deleteUser(int $user_id)
     {
         $dbm = Connection::access();
         try {
             $check = false;
-            $clause = "DELETE FROM user WHERE email =?";
+            $clause = "DELETE FROM user WHERE user_id =?";
             $stmt = $dbm->prepare($clause);
-            if ($stmt->execute([$user_email])) {
+            if ($stmt->execute([$user_id])) {
                 $check = true;
             }
         } catch (PDOException $e) {
