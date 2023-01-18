@@ -56,6 +56,22 @@ class DBAdmin
 
         }
     }
+    public static function getPossiblesCategories( $field) {
+        try {
+            $db = Connection::access();
+            $sql = "SHOW FIELDS FROM categories LIKE '{$field}'";
+            $result = $db->query($sql);
+            $row = $result->fetch();
+            preg_match('#^enum\((.*?)\)$#ism', $row['Type'], $matches);
+            $enum = str_getcsv($matches[1], ",", "'");
+            return $enum;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $db = null;
+
+        }
+    }
 
 
 }

@@ -7,7 +7,7 @@ class DBManagerCategories
     /**
      * @return array of all the categories in the database
      */
-    public function getAll(): array
+    public static function getAll(): array
     {
         $dbm = Connection::access();
         try {
@@ -30,7 +30,7 @@ class DBManagerCategories
      * @param $cat_id integer the id of the category
      * @return false if no category is found or an Object Category.php if it already exists
      */
-    public function getCategoryById($cat_id)
+    public static function getCategoryById($cat_id)
     {
         $dbm = Connection::access();
         try {
@@ -39,7 +39,7 @@ class DBManagerCategories
             $stmt->execute([$cat_id]);
             $result = $stmt->fetch();
             if ($stmt->execute([$cat_id])) {
-                $category = new Category($result['cat_id'], $result['name'], $result['description'], $result['img']);
+                $category = new Category($result['cat_id'], $result['name'], $result['description'], $result['img'],$result['upper_cat_id']);
             } else {
                 $category = false;
             }
@@ -57,7 +57,7 @@ class DBManagerCategories
      * @param $img string Path to the new image of the new category
      * @return bool true if category has been created successfully of false if it hasn't been created.
      */
-    public function insertCategory($name, $description, $img)
+    public static function insertCategory($name, $description, $img)
     {
         $dbm = Connection::access();
         try {
@@ -82,7 +82,7 @@ class DBManagerCategories
      * @param $img string New path to the new image of the category or the path to the previous one
      * @return bool true if the category has been update successfully or false it hasn't been updated
      */
-    public function updateCategory($cat_id, $name,$description, $img)
+    public static function updateCategory($cat_id, $name,$description, $img)
     {
         $dbm = Connection::access();
         try {
@@ -104,7 +104,7 @@ class DBManagerCategories
      * @param $cat_id int Id of the category that it's going to be deleted
      * @return bool true if the category has been deleted, false otherwise
      */
-    public function deleteCategory($cat_id){
+    public static function deleteCategory($cat_id){
         $dbm = Connection::access();
         try {
             $check = false;
