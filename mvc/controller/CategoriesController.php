@@ -8,84 +8,72 @@ class CategoriesController
     public function viewCategory($category_id){
         $category = DBManagerCategories::getCategoryById($category_id);
         $info['category']=$category;
+        var_dump($info);
         $info['title'] = $category->getName();
-        $info['possibleCategories'] =  DBAdmin::getPossiblesRoles('category');
         $this->load_view('view/back-card-views/card-categories.php','view/template.php',$info);
     }
 
     public function processCategory($action){
         if(isset($_POST['delete'])){
-            $check = DBManagerUsers::deleteUser($_POST['categoryId']);
+            $check = DBManagerCategories::deleteCategory($_POST['categoryId']);
             if($check){
-                $_SESSION['status']= DBManagerUsers::deleteUser($_POST['categoryId']);
                 header('Location: ../categories');
             }else{
                 $_SESSION['error-message'] = 'Category could not be deleted';
             }
         }else{
-            /*
             $_SESSION['error-message'] = '';
             $errorMsg = '';
+            $tipo = $_FILES["categoryImg"]["type"];
+            $nombreArchivo = $_FILES["categoryImg"]["name"];
+            $ext = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
             $check = true;
-            $newPassword = $_POST['userPassword'];
-            $newRol = $_POST['user-rol'];
-            $newTokens =$_POST['userTokens'];
-            $newTelph = $_POST['userTelph'];
+            $catId =(int)$_POST['categoryId'];
+            $categoryName = $_POST['categoryName'];
+            $categoryDescription = $_POST['categoryDescription'];
+            var_dump($_POST);
+            $categoryUpper = (int)$_POST['categoryUpper'];
 
-            if($newPassword===''){
-                $errorMsg.= 'Password field is empty';
+            if($categoryName===''){
+                $errorMsg.= 'Name field is empty';
                 $check = false;
             }else{
-                $regex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$/';
-                if(!preg_match($regex,$newPassword)){
-                    $errorMsg.= 'Password field invalid. At least one of the following characters: lowercase, uppercase, number and length equal or greater than 8 characters.';
+                $regex = '/^[a-záéíóúüñç_]{2,20}$/i';
+                if(!preg_match($regex,$categoryName)){
+                    $errorMsg.= 'Name field invalid.Name field invalid. No numbers or special characters allowed. Min length: 2. Max length: 20. ';
                     $check = false;
                 }
             }
-            if($newRol===''){
-                $errorMsg.= 'Role field is empty';
+
+            if(strlen($categoryDescription)>=1000){
+                $errorMsg.= 'Description max length 1000.';
                 $check = false;
             }else{
-                $possibleRoles = DBAdmin::getPossiblesRoles('rol');
-                $_SESSION['roles'] = $possibleRoles;
-                $_SESSION['check'] = in_array($newRol,$possibleRoles);
-                $check2 =false;
-                foreach ($possibleRoles as $_role){
-                    if($_role === $newRol){
-                        $check2=true;
+                $temporal = $_FILES["categoryImg"]["tmp_name"];
+                $pathtemp = "../../../view/categories-images/".$catId."";
+                $path = "../../../view/categories-images/".$catId."/". $_FILES["categoryImg"]["name"];
+                if(!is_dir($pathtemp)){
+                    if (!mkdir($pathtemp) && !is_dir($pathtemp)) {
+                        throw new \RuntimeException(sprintf('Directory "%s" was not created', $pathtemp));
                     }
                 }
-                if(!$check2){
-                    $errorMsg.= "Role typed doesn't exist.";
-                    $check = false;
-                }
+                move_uploaded_file($temporal, $path);
             }
+            if ($ext !== '.jpg'||$ext !== '.jpeg'||$ext !== '.png') {
+                $errorMsg.= 'Invalid image type. Accepted image types: JPEG and PNG.';
+            }else{
 
-            if($newTokens===''){
-                $errorMsg.= 'Tokens field is empty';
-                $check = false;
-            }else{
-                if(gettype((double)$newTokens)!=='double'){
-                    $errorMsg.= 'Token field invalid. Must be a double';
-                    $check = false;
-                }
             }
-            if($newTelph===''){
-                $errorMsg.= 'Telephone field is empty';
-                $check = false;
-            }else{
-                $regex = '/^\+((?:9[679]|8[035789]|6[789]|5[90]|42|3[578]|2[1-689])|9[0-58]|8[1246]|6[0-6]|5[1-8]|4[013-9]|3[0-469]|2[70]|7|1)(?:\W*\d){0,13}\d$/';
-                if(!preg_match($regex,$newTelph)){
-                    $errorMsg.= 'Telephone field invalid. Check again';
+            if($categoryUpper===0||$categoryUpper===1||$categoryUpper===2||$categoryUpper===3||$categoryUpper===4){
+                    $errorMsg.= 'Upper category field invalid. Valid:(1,2,3,4)';
                     $check = false;
-                }
             }
             if($check){
-                DBManagerUsers::updateUser($newPassword,$newRol,(double)$newTokens,$newTelph,(int)$_POST['userId']);
+                DBManagerCategories::updateCategory($catId,$categoryName,$categoryDescription,$categoryImg);
             }else{
                 $_SESSION['error-message'] = $errorMsg;
             }
-            $this->viewUser($_POST['userId']);*/
+            $this->viewCategory($catId);
         }
     }
 }

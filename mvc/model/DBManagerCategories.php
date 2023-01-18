@@ -15,7 +15,7 @@ class DBManagerCategories
             $results = $dbm->query($clause);
             $categories = array();
             foreach ($results as $result) {
-                $category = new Category($result['cat_id'], $result['name'], $result['description'], $result['img']);
+                $category = new Category($result['cat_id'], $result['name'], $result['description'], $result['img'],$result['upper_cat_id']);
                 $categories[] = $category;
             }
         } catch (PDOException $e) {
@@ -38,8 +38,12 @@ class DBManagerCategories
             $stmt = $dbm->prepare($clause);
             $stmt->execute([$cat_id]);
             $result = $stmt->fetch();
+            var_dump($result);
             if ($stmt->execute([$cat_id])) {
-                $category = new Category($result['cat_id'], $result['name'], $result['description'], $result['img'],$result['upper_cat_id']);
+                if($result[4]==null){
+                    $result[4]=0;
+                }
+                $category = new Category((int)$result['cat_id'],$result['name'],$result['description'],$result['img'],$result[4]);
             } else {
                 $category = false;
             }
