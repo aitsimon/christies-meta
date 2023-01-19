@@ -45,6 +45,8 @@ if (isset($array_path[0]) && $array_path[0] === 'admin' && $array_path[1] === 'l
         }else{
             if($array_path[3]==='process'){
                $category_controller->processCategory($_POST);
+            }else if($array_path[3]==='add'){
+                $category_controller->addCategory();
             }else{
                 $category_controller->viewCategory($array_path[3]);
             }
@@ -57,6 +59,8 @@ if (isset($array_path[0]) && $array_path[0] === 'admin' && $array_path[1] === 'l
         }else{
             if($array_path[3]==='process'){
                 $user_controller->processUser($_POST);
+            }else if($array_path[3]==='add'){
+                    $user_controller->addUser();
             }else{
                 $user_controller->viewUser($array_path[3]);
             }

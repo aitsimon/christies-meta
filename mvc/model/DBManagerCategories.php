@@ -38,7 +38,6 @@ class DBManagerCategories
             $stmt = $dbm->prepare($clause);
             $stmt->execute([$cat_id]);
             $result = $stmt->fetch();
-            var_dump($result);
             if ($stmt->execute([$cat_id])) {
                 if($result[4]==null){
                     $result[4]=0;
@@ -122,6 +121,37 @@ class DBManagerCategories
         } finally {
             $dbm = null;
             return $check;
+        }
+    }
+    public static function getAllPossibleCategories(){
+        $dbm = Connection::access();
+        try {
+            $clause = 'SELECT cat_id FROM categories';
+            $stmt = $dbm->query($clause);
+            $result = $stmt->fetchAll();
+            $categories = [];
+            foreach ($result as $r){
+                $categories[] = $r['cat_id'];
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return $categories;
+        }
+    }
+    public static function getNewMaxId(){
+        $dbm = Connection::access();
+        try {
+            $clause = 'SELECT MAX(cat_id) FROM categories';
+            $stmt = $dbm->query($clause);
+            $result = $stmt->fetch();
+            $newId =(int)$result[0]+1;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return $newId;
         }
     }
 }

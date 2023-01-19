@@ -13,7 +13,7 @@ function previewFile(input){
 }
 var todosI =document.getElementsByTagName('input');
 var todosTextArea = document.getElementsByTagName('textarea');
-var botones = document.getElementsByName('edit');
+var botones = document.getElementsByName('add');
 var bEnviar = botones[0];
 bEnviar.disabled = 'true';
 for (let i = 0; i < 2; i++) {
@@ -61,13 +61,6 @@ function comprobar(evt) {
                 smallError.innerHTML = 'Tokens must be a number.';
             }
             break;
-        case 'categoryUpper':
-            let categoryUpperEntered =parseInt(elemento.value);
-            if(categoryUpperEntered===0||categoryUpperEntered===1||categoryUpperEntered===2||categoryUpperEntered===3||categoryUpperEntered===4){
-                smallError.innerHTML = '';
-            }else{
-                smallError.innerHTML = 'Invalid category upper entered.';
-            }
     }
 }
 function comprobarTodos() {

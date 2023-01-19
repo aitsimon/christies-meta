@@ -118,7 +118,7 @@
                 },
                 password: {
                     required: "Please provide a password",
-                    minlength: "Your password must be at least 5 characters long"
+                    minlength: "Your password must be at least 8 characters long. 1 uppercase, 1 lowercase and 1 number required."
                 },
                 terms: "Please accept our terms"
             },

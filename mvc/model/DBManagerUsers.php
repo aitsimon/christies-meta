@@ -66,7 +66,7 @@ class DBManagerUsers
             $check = false;
             $clause = "INSERT INTO user (email, password, rol, telph) VALUES ( ?, ?, ?, ?) ";
             $stmt = $dbm->prepare($clause);
-            if ($stmt->execute([$email, $password, $rol, $telph])) {
+            if ($stmt->execute([$email, sha1($password), $rol, $telph])) {
                 $check = true;
             }
         } catch (PDOException $e) {

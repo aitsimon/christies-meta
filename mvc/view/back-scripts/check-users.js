@@ -1,12 +1,12 @@
 var todosI =document.getElementsByTagName('input');
-var botones = document.getElementsByName('edit');
+var botones = document.getElementsByName('add');
 var bEnviar = botones[0];
 bEnviar.disabled = 'true';
 for (let i = 0; i < 2; i++) {
     todosI[i].setAttribute('required', '');
     todosI[i].addEventListener('blur;',comprobar);
 }
-for (let i = 2; i < todosI.length; i++) {
+for (let i = 0; i < todosI.length; i++) {
     todosI[i].setAttribute('onblur', 'comprobar(event,this), comprobarTodos()');
 
 }
@@ -18,6 +18,15 @@ function comprobar(evt) {
     var name = elemento.name;
     var smallError = elemento.nextElementSibling;
     switch (name) {
+        case 'userEmail':
+            let regexx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            let emailEntered = elemento.value;
+            if(regexx.test(emailEntered)) {
+                smallError.innerHTML="";
+            }else{
+                smallError.innerHTML= "Enter a valid email address."
+            }
+            break;
         case 'userPassword':
             let patron = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
             let passwordEntered = elemento.value;
@@ -30,7 +39,12 @@ function comprobar(evt) {
         case 'user-rol':
         case 'userRol':
            let rolEntered = elemento.value;
-           if(rolEntered==='admin'||rolEntered==='user'){
+           let options = document.getElementsByTagName('option');
+           let roles = [];
+            for (let i = 0; i <options.length ; i++) {
+                roles.push(options[i].value);
+            }
+           if(roles.includes(rolEntered)){
                smallError.innerHTML='';
            }else{
                smallError.innerHTML='Rol field invalid. Choose one of the select options'

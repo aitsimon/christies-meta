@@ -23,39 +23,27 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
         };
         ?>
         <form class="container" enctype="multipart/form-data" method="post" action="./../../../mvc/index.php/admin/dashboard/categories/process">
-            <input type="hidden" id="categoryId" name="categoryId" value="<?php echo $info['category']->getCatId() ?>">
+            <input type="hidden" id="categoryId" name="categoryId" value="">
             <div class="form-group">
                 <label for="categoryName">Name</label>
                 <input type="text" class="form-control" id="categoryName" aria-describedby="nameHelp"
-                       placeholder="virtual_name" required name="categoryName" value="<?php echo $info['category']->getName() ?>">
+                       placeholder="virtual_name" required name="categoryName" value="">
                 <small id="nameHelp" class="form-text text-muted">Name of the category</small>
             </div>
             <div class="form-group">
                 <label for="categoryDescription">Description*</label>
-                <textarea name="categoryDescription"  class="form-control" id="categoryDescription" cols="30" rows="10"><?php echo $info['category']->getDescription() ?></textarea>
+                <textarea name="categoryDescription"  class="form-control" id="categoryDescription" cols="30" rows="10"></textarea>
                 <small id="descriptionHelp" class="form-text text-muted">Description of the category</small>
             </div>
             <div class="form-group">
                 <label for="categoryImg">Img*</label>
-                <input type="file" name="categoryImg" onchange="previewFile(this)" accept="image/*" aria-describedby="imgHelp" class="form-control" id="categoryImg" value="<?php echo $info['category']->getImg()?>">
+                <input type="file" name="categoryImg" onchange="previewFile(this)" accept="image/*" aria-describedby="imgHelp" class="form-control" id="categoryImg" value="">
                 <div class="card">
-                    <img src="<?php echo $info['category']->getImg() ?>" id="previewImg">
+                    <img src="" id="previewImg">
                 </div>
             </div>
-            <div class="form-group">
-                <label for="category-Upper">Category Upper Id*</label>
-                <input list="categoryUpper" aria-describedby="categoryUpperHelp" required class="form-control w-25" id="category-Upper" name="category-Upper" value="<?php echo $info['category']->getCatId()?>">
-                <datalist id="categoryUpper">
-                <?php
-                    foreach ($info['possibleCategories'] as $possibleCategory) {
-                            echo "<option value='".$possibleCategory."'>";
-                        }
-                ?>
-                </datalist>
-            </div>
             <div class="form-group mt-3">
-                <button type="submit" name="edit" class="btn-lg btn-primary btn-disa mr-5 " value="edit">Edit</button>
-                <button type="submit" name="delete" class="btn-lg btn-danger ml-5 form-buttons" value="delete">Delete</button>
+                <button type="submit" name="add" class="btn-lg btn-primary mr-5 " value="add">Add</button>
             </div>
         </form>
     </div>
