@@ -43,8 +43,8 @@ function comprobar(evt) {
     var name = elemento.name;
     var smallError = elemento.nextElementSibling;
     switch (name) {
-        case 'categoryName':
-            let patron = /^[a-záéíóúüñç_]{2,20}$/i;
+        case 'objectName':
+            let patron = /^[a-záéíóúüñç_]{3,20}$/i;
             let nameEntered = elemento.value;
             if(patron.test(nameEntered)) {
                 smallError.innerHTML='';
@@ -52,19 +52,11 @@ function comprobar(evt) {
                 smallError.innerHTML='Name field invalid. No numbers or special characters allowed. Min length: 2. Max length: 20.';
             }
             break;
-        case 'categoryDescription':
-            let descriptionEntered = elemento.value;
-            if(descriptionEntered.length<1000){
-                smallError.innerHTML='';
-            }else{
-                smallError.innerHTML='Description max length 1000 characters.'
-            }
-            break;
-        case 'userTokens':
+        case 'objectPrice':
             if (typeof (eval(elemento.value))==='number') {
                 smallError.innerHTML = '';
             } else {
-                smallError.innerHTML = 'Tokens must be a number.';
+                smallError.innerHTML = 'Price must be a number.';
             }
             break;
     }
