@@ -96,7 +96,7 @@ class CategoriesController
 
             $mega = 1024 * 1024;
             $tam = $_FILES["categoryImg"]["size"];
-
+            $nombreArchivo = $_FILES["archivo"]["name"];
 
             if($categoryName===''){
                 $errorMsg.= 'Name field is empty';
@@ -112,7 +112,7 @@ class CategoriesController
                 $errorMsg.= 'Description max length 1000.';
                 $check = false;
             }
-            if ($tam > 8 * $mega) { //1024 bytes = 1KB =>1024*1024=1MB
+            if ($tam > 8 * $mega) {  //1024 bytes = 1KB =>1024*1024=1MB
                 $errorMsg = "Archivo muy grande";
                 $check =false;
             } else {

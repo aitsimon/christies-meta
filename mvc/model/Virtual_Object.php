@@ -75,33 +75,23 @@ class Virtual_Object
         $this->cat_id = $cat_id;
     }
 
-    /**
-     * @return string
-     */
-    public function getLat(): string
+
+    public function getLat()
     {
         return $this->lat;
     }
 
-    /**
-     * @param string $lat
-     */
+
     public function setLat(string $lat): void
     {
         $this->lat = $lat;
     }
 
-    /**
-     * @return string
-     */
-    public function getLon(): string
+    public function getLon()
     {
         return $this->lon;
     }
 
-    /**
-     * @param string $lon
-     */
     public function setLon(string $lon): void
     {
         $this->lon = $lon;
@@ -139,33 +129,24 @@ class Virtual_Object
         $this->img1 = $img1;
     }
 
-    /**
-     * @return string
-     */
-    public function getImg2(): string
+
+    public function getImg2()
     {
         return $this->img2;
     }
 
-    /**
-     * @param string $img2
-     */
+
     public function setImg2(string $img2): void
     {
         $this->img2 = $img2;
     }
 
-    /**
-     * @return string
-     */
-    public function getImg3(): string
+
+    public function getImg3()
     {
         return $this->img3;
     }
 
-    /**
-     * @param string $img3
-     */
     public function setImg3(string $img3): void
     {
         $this->img3 = $img3;

@@ -36,10 +36,10 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
                 <small id="descriptionHelp" class="form-text text-muted">Description of the category</small>
             </div>
             <div class="form-group">
-                <label for="categoryImg">Img*</label>
+                <label for="categoryImg">Image*</label>
                 <input type="file" name="categoryImg" onchange="previewFile(this)" accept="image/*" aria-describedby="imgHelp" class="form-control" id="categoryImg" value="<?php echo $info['category']->getImg()?>">
                 <div class="card">
-                    <img src="<?php echo $info['category']->getImg() ?>" id="previewImg">
+                    <img src="<?php echo $info['category']->getImg() ?>" alt="Image of the category" id="previewImg">
                 </div>
             </div>
             <div class="form-group">

@@ -13,4 +13,10 @@ class ObjectController
         $info['title'] = $object->getName();
         $this->load_view('view/back-card-views/card-objects.php','view/template.php',$info);
     }
+    public function addObject(){
+        require ('model/session-control.php');
+        $info = array();
+        $info['title'] = 'New Object';
+        $this->load_view('view/back-card-views/card-object-add.php','view/template.php',$info);
+    }
 }

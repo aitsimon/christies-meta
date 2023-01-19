@@ -28,18 +28,26 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
                 <label for="objectName">Name*</label>
                 <input type="text" class="form-control" id="objectName" aria-describedby="emailHelp"
                        placeholder="object name" required name="objectName" value="<?php echo $info['object']->getName() ?>">
+                <small id="nameHelp" class="form-text text-muted">Name of the object</small>
+
             </div>
             <div class="form-group">
-                <label for="objectPassword">Latitude</label>
-                <input type="number" step="0.0001" class="form-control" id="objectPassword" aria-describedby="passwordHelp"
-                       placeholder="-82.14" min="-90" max="90" name="objectPassword" value="">
-                <small id="emailHelp" class="form-text text-muted">Latitude of the object, optional.</small>
+                <label for="objectLatitude">Latitude</label>
+                <input type="number" step="any" class="form-control" id="objectLatitude" aria-describedby="latitudeHelp"
+                       placeholder="-82.14" min="-90" max="90" name="objectLatitude" value="">
+                <small id="latitudeHelp" class="form-text text-muted">Latitude of the object, optional.</small>
             </div>
             <div class="form-group">
-                <label for="objectPassword">Longitude</label>
-                <input type="number" step="0.0001" class="form-control" id="objectPassword" aria-describedby="passwordHelp"
-                       placeholder="60" min="-180" max="180" required name="objectPassword" value="">
-                <small id="emailHelp" class="form-text text-muted">Longitude of the object, optional.</small>
+                <label for="objectLongitude">Longitude</label>
+                <input type="number" step="any" class="form-control" id="objectLongitude" aria-describedby="longitudeHelp"
+                       placeholder="60" min="-180" max="180"  name="objectLongitude" value="">
+                <small id="longitudeHelp" class="form-text text-muted">Longitude of the object, optional.</small>
+            </div>
+            <div class="form-group">
+                <label for="objectPrice">Price*</label>
+                <input type="number" step="any" class="form-control" id="objectPrice" aria-describedby="priceHelp"
+                       placeholder="60" min="-180" max="180" required name="objectPrice" value="">
+                <small id="priceHelp" class="form-text text-muted">Price of the object.</small>
             </div>
             <div class="form-group">
                 <label for="object-cat">Category*</label>
@@ -47,25 +55,32 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
                 <small id="catHelp" class="form-text text-muted">Select one category for the object</small>
                 <datalist id="objectCategory">
                     <?php
-
-                        foreach ($info['possibleCategories'] as $role){
-                            echo "<option value='".$role."'>";
-                        }
+                    foreach ($info['possibleCategories'] as $category){
+                        echo "<option value='".$category."'>";
+                    }
                     ?>
                 </datalist>
-
             </div>
             <div class="form-group">
-                <label for="objectTokens">Price*</label>
-                <input type="number" step="any" required class="form-control" id="objectTokens" aria-describedby="tokensHelp"
-                       placeholder="123890.930" name="objectTokens" value="">
-                <small id="tokensHelp" class="form-text text-muted">Amount of tokens of the object</small>
+                <label for="objectImg1">Principal Image*</label>
+                <input type="file" required name="objectImg1" onchange="previewFile(this,0)" accept="image/*" aria-describedby="imgHelp" class="form-control" id="objectImg1" value="<?php echo $info['object']->getImg1()?>">
+                <div class="card">
+                    <img src="<?php echo $info['object']->getImg1() ?>" alt="Image of the product" id="previewImg0" class="prev-img">
+                </div>
             </div>
             <div class="form-group">
-                <label for="objectTelph">Telephone*</label>
-                <input type="text" required class="form-control" id="objectTelph" aria-describedby="objectTelph"
-                       placeholder="+34 999 999 999" name="objectTelph" value="">
-                <small id="objectTelph" class="form-text text-muted">Telephone number of the object with international prefix.</small>
+                <label for="objectImg2">Additional Image 2</label>
+                <input type="file" name="objectImg2" onchange="previewFile(this,1)" accept="image/*" aria-describedby="imgHelp2" class="form-control" id="objectImg2" value="<?php if($info['object']->getImg2()!=NULL&&$info['object']->getImg2()!=''){echo $info['object']->getImg2();}?>">
+                <div class="card">
+                    <img src="<?php if($info['object']->getImg2()!=NULL&&$info['object']->getImg2()!=''){echo $info['object']->getImg2();}?>" alt='Image of the product' id='previewImg1' class="prev-img">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="objectImg3">Additional Image 3</label>
+                <input type="file" name="objectImg3" onchange="previewFile(this,2)" accept="image/*" aria-describedby="imgHelp" class="form-control" id="objectImg3" value="<?php if($info['object']->getImg3()!=NULL&&$info['object']->getImg3()!=''){echo $info['object']->getImg3();}?>">
+                <div class="card">
+                    <img <?php if($info['object']->getImg3()!=NULL&&$info['object']->getImg3()!=''){echo "src='".$info['object']->getImg3()."'"; };?> alt='Image of the product' id='previewImg2' class="prev-img">
+                </div>
             </div>
            <div class="form-group mt-3">
                <button type="submit" name="edit" class="btn-lg btn-primary mr-5 bt-fo" value="edit">Edit</button>
@@ -74,4 +89,4 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
         </form>
     </div>
 </section>
-<script type="text/javascript" src="../back-scripts/check-objects.js">
+<script type="text/javascript" src="../back-scripts/check-object.js">
