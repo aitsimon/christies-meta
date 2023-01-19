@@ -54,7 +54,7 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
                 </datalist>
             </div>
             <div class="form-group mt-3">
-                <button type="submit" name="edit" class="btn-lg btn-primary btn-disa mr-5 " value="edit">Edit</button>
+                <button type="submit" name="edit" class="btn-lg btn-primary btn-disa mr-5 bt-fo" value="edit">Edit</button>
                 <button type="submit" name="delete" class="btn-lg btn-danger ml-5 form-buttons" value="delete">Delete</button>
             </div>
         </form>

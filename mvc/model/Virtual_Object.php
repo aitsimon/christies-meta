@@ -4,24 +4,25 @@ class Virtual_Object
 {
     public int $object_id;
     public string $name;
-    public string $lat;
-    public string $lon;
+    public float $lat;
+    public float $lon;
     public float $price;
     public string $img1;
-    public string $img2;
-    public string $img3;
+    public $img2;
+    public $img3;
+    public int $cat_id;
 
     /**
      * @param int $object_id
      * @param string $name
-     * @param string $lat
-     * @param string $lon
+     * @param float $lat
+     * @param float $lon
      * @param float $price
      * @param string $img1
      * @param string $img2
      * @param string $img3
      */
-    public function __construct(int $object_id, string $name, string $lat, string $lon, float $price, string $img1, string $img2='NULL', string $img3='NULL')
+    public function __construct(int $object_id, string $name,  $lat=NULL,  $lon=NULL, float $price, string $img1,  $img2=NULL,  $img3=NULL, $cat_id)
     {
         $this->object_id = $object_id;
         $this->name = $name;
@@ -31,6 +32,7 @@ class Virtual_Object
         $this->img1 = $img1;
         $this->img2 = $img2;
         $this->img3 = $img3;
+        $this->cat_id = $cat_id;
     }
 
     /**
@@ -55,6 +57,22 @@ class Virtual_Object
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCatId(): int
+    {
+        return $this->cat_id;
+    }
+
+    /**
+     * @param int $cat_id
+     */
+    public function setCatId(int $cat_id): void
+    {
+        $this->cat_id = $cat_id;
     }
 
     /**

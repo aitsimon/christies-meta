@@ -1,7 +1,12 @@
 var todosI =document.getElementsByTagName('input');
-var botones = document.getElementsByName('add');
+var botones = document.getElementsByClassName('bt-fo');
 var bEnviar = botones[0];
-bEnviar.disabled = 'true';
+bEnviar.classList.remove('btn-primary');
+
+bEnviar.removeAttribute('aria-disabled','false');
+
+bEnviar.disabled = true;
+
 for (let i = 0; i < 2; i++) {
     todosI[i].setAttribute('required', '');
     todosI[i].addEventListener('blur;',comprobar);

@@ -43,7 +43,7 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
                 </div>
             </div>
             <div class="form-group mt-3">
-                <button type="submit" name="add" class="btn-lg btn-primary mr-5 " value="add">Add</button>
+                <button type="submit" name="add" class="btn-lg btn-primary mr-5 bt-fo" value="add">Add</button>
             </div>
         </form>
     </div>

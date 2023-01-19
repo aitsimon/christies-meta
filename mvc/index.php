@@ -5,6 +5,7 @@ require("./controller/Controller.php");
 require("./controller/FrontController.php");
 require("./controller/UserController.php");
 require("./controller/CategoriesController.php");
+require("./controller/ObjectController.php");
 require("./model/DBAdmin.php");
 require ('./model/DBManagerUsers.php');
 require ('./model/DBManagerCategories.php');
@@ -16,6 +17,7 @@ $controller = new Controller();
 $front_controller = new FrontController();
 $user_controller = new UserController();
 $category_controller = new CategoriesController();
+$object_controller = new ObjectController();
 //Ruta de la home
 $home = "/christies-meta/mvc/index.php/";
 //Quito la home de la ruta de la barra de direcciones
@@ -52,7 +54,13 @@ if (isset($array_path[0]) && $array_path[0] === 'admin' && $array_path[1] === 'l
             }
         }
     } else if ($array_path[2] === 'products') {
-        $controller->showDashboardProducts();
+        if(!isset($array_path[3])){
+            $controller->showDashboardProducts();
+        }else if($array_path[3]==='add'){
+            $object_controller->addObject();
+        }else{
+            $object_controller->viewObject($array_path[3]);
+        }
     } else if ($array_path[2] === 'users') {
         if(!isset($array_path[3])){
             $controller->showDashboardUsers();

@@ -34,7 +34,7 @@ class CategoriesController
             $check = true;
             $categoryName = $_POST['categoryName'];
             $categoryDescription = $_POST['categoryDescription'];
-           $_POST['categoryId'] =(string) DBManagerCategories::getNewMaxId();
+            $_POST['categoryId'] =(string) DBManagerCategories::getNewMaxId();
 
             $mega = 1024 * 1024;
             $tam = $_FILES["categoryImg"]["size"];
@@ -70,7 +70,7 @@ class CategoriesController
                     $categoryImg="http://localhost/christies-meta/mvc/view/categories-images/".$_POST['categoryId']."/{$newName}";
                 }else{
                     $errorMsg.= "Archivo no enviado, ya existe";
-                    $categoryImg =$_POST['categoryImg'];
+                    $categoryImg = $_POST['categoryImg'];
                 }
             }
             $check2=false;
