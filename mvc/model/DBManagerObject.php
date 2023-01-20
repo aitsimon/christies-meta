@@ -36,7 +36,7 @@ class DBManagerObject
         try {
             $clause = 'SELECT * FROM object WHERE object_id = ?';
             $stmt = $dbm->prepare($clause);
-            $stmt->execute([$object_id]);
+            $stmt->execute([(int)$object_id]);
             $result = $stmt->fetch();
             if ($stmt->execute([$object_id])) {
                 $object = new Virtual_Object($result['object_id'], $result['name'], $result['lat'], $result['lon'], $result['price'], $result['img1'], $result['img2'], $result['img3'], $result['cat_id']);

@@ -15,20 +15,14 @@ var todosI =document.getElementsByTagName('input');
 var todosTextArea = document.getElementsByTagName('textarea');
 var botones = document.getElementsByClassName('bt-fo');
 var bEnviar = botones[0];
-bEnviar.classList.remove('btn-primary');
 
-bEnviar.removeAttribute('aria-disabled','false');
-
-bEnviar.disabled = true;
-
-bEnviar.disabled = 'true';
 for (let i = 0; i < 2; i++) {
-    todosI[i].setAttribute('required', '');
     todosI[i].addEventListener('blur;',comprobar);
+    todosI[i].addEventListener('loadstart;',comprobar);
 }
 for (let i = 0; i < todosI.length; i++) {
     todosI[i].setAttribute('onblur', 'comprobar(event,this), comprobarTodos()');
-
+    todosI[i].setAttribute('onload', 'comprobar(event,this), comprobarTodos()');
 }
 for (let i = 0; i < todosTextArea.length; i++) {
     todosTextArea[i].setAttribute('required', '');
@@ -44,7 +38,7 @@ function comprobar(evt) {
     var smallError = elemento.nextElementSibling;
     switch (name) {
         case 'objectName':
-            let patron = /^[a-záéíóúüñç_]{3,20}$/i;
+            let patron = /^[a-záéíóúüñç\-\_\s]{3,20}$/i;
             let nameEntered = elemento.value;
             if(patron.test(nameEntered)) {
                 smallError.innerHTML='';

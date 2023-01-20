@@ -4,24 +4,14 @@ class Virtual_Object
 {
     public int $object_id;
     public string $name;
-    public float $lat;
-    public float $lon;
+    public  $lat;
+    public  $lon;
     public float $price;
     public string $img1;
     public $img2;
     public $img3;
     public int $cat_id;
 
-    /**
-     * @param int $object_id
-     * @param string $name
-     * @param float $lat
-     * @param float $lon
-     * @param float $price
-     * @param string $img1
-     * @param string $img2
-     * @param string $img3
-     */
     public function __construct(int $object_id, string $name,  $lat=NULL,  $lon=NULL, float $price, string $img1,  $img2=NULL,  $img3=NULL, $cat_id)
     {
         $this->object_id = $object_id;

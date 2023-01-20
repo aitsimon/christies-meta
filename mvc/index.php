@@ -56,10 +56,14 @@ if (isset($array_path[0]) && $array_path[0] === 'admin' && $array_path[1] === 'l
     } else if ($array_path[2] === 'products') {
         if(!isset($array_path[3])){
             $controller->showDashboardProducts();
-        }else if($array_path[3]==='add'){
-            $object_controller->addObject();
         }else{
-            $object_controller->viewObject($array_path[3]);
+            if($array_path[3]==='process'){
+                $object_controller->processObject($_POST);
+            }else if($array_path[3]==='add'){
+                    $object_controller->addObject();
+                }else{
+                    $object_controller->viewObject($array_path[3]);
+                }
         }
     } else if ($array_path[2] === 'users') {
         if(!isset($array_path[3])){

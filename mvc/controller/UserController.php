@@ -84,15 +84,6 @@ class UserController
                     $check = false;
                 }
             }
-            if ($newTokens === '') {
-                $errorMsg .= 'Tokens field is empty';
-                $check = false;
-            } else {
-                if (gettype((double)$newTokens) !== 'double') {
-                    $errorMsg .= 'Token field invalid. Must be a double';
-                    $check = false;
-                }
-            }
             if ($newTelph === '') {
                 $errorMsg .= 'Telephone field is empty';
                 $check = false;
