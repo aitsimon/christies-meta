@@ -16,12 +16,12 @@ class Virtual_Object
     {
         $this->object_id = $object_id;
         $this->name = $name;
-        $this->lat = $lat;
-        $this->lon = $lon;
+        $this->lat = $lat || NULL;
+        $this->lon = $lon || NULL;
         $this->price = $price;
         $this->img1 = $img1;
-        $this->img2 = $img2;
-        $this->img3 = $img3;
+        $this->img2 = $img2 || NULL;
+        $this->img3 = $img3 || NULL;
         $this->cat_id = $cat_id;
     }
 

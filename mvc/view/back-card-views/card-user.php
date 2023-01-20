@@ -18,8 +18,8 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
 <section class="content mb-3">
     <div class="container-fluid">
     <?php
-    if(isset($_SESSION['error-message'])){
-    echo "<small style='color:red'>".$_SESSION['error-message']."</small>";
+        if(isset($_SESSION['error-message'])){
+        echo "<small style='color:red'>".$_SESSION['error-message']."</small>";
     };
     ?>
         <form class="container" method="post" action="./../../../mvc/index.php/admin/dashboard/users/process">
@@ -67,5 +67,30 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
            </div>
         </form>
     </div>
+</section>
+<section>
+        <?php
+        foreach($info['userComments'] as $comment){
+            echo "<div class='container border border-info bg-lightblue rounded my-5'>";
+                echo '<form method="post" class="container" action="./../../../mvc/index.php/admin/dashboard/users/process">';
+                    echo '<input type="hidden" name="commentId" value="'.$comment->getCommentId().'">';
+                    echo '<input type="hidden" name="userId" value="'.$info['user']->getUserId().'">';
+                    echo '<div class="form-group">';
+                        echo '<label for="objectId">Object_Id</label>';
+                        echo '<input class="form-control w-25" type="number" value="'.$comment->getObjectId().'">';
+                    echo '</div>';
+                    echo '<div class="form-group">';
+                        echo '<label for="commentContent">Comment Content</label>';
+                        echo '<textarea name="commentContent" rows="4" class="form-control" cols="50">'.$comment->getContent().'</textarea>';
+                    echo '</div>';
+                    echo '<div class="form-group">';
+                        echo '<button type="submit" name="edit-comment" class="btn-lg btn-primary mr-5 bt-fo" value="edit">Edit</button>';
+                        echo '<button type="submit" name="delete-comment" class="btn-lg btn-danger mr-5 bt-fo" value="edit">Delete</button>';
+                    echo '</div>';
+                echo '</form>';
+            echo '</div>';
+        }
+        ?>
+    </form>
 </section>
 <script type="text/javascript" src="../back-scripts/check-users.js">

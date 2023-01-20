@@ -14,6 +14,7 @@ class UserController
         $info['user'] = $user;
         $info['title'] = $user->getEmail();
         $info['possibleRoles'] = DBAdmin::getPossiblesRoles('rol');
+        $info['userComments'] = DBManagerComments::getCommentsByUserId($user_id);
         $this->load_view('view/back-card-views/card-user.php', 'view/template.php', $info);
     }
 
@@ -36,6 +37,27 @@ class UserController
             } else {
                 $_SESSION['error-message'] = 'User could not be deleted';
             }
+        }else if (isset($_POST['edit-comment'])){
+            $_SESSION['error-message'] = '';
+            $errorMsg = '';
+            $check = true;
+            $commentId = $_POST['commentId'];
+            $commentContent = $_POST['commentContent'];
+
+            if(strlen($commentContent)<=3){
+                $errorMsg .= 'Comment content must have a length equal or greater than 3.';
+                $check = false;
+            }
+            if($check){
+               DBManagerComments::updateComment($commentContent,$commentId);
+            }else{
+                $_SESSION['error-message'] = $errorMsg;
+            }
+            $this->viewUser($_POST['userId']);
+
+        }else if (isset($_POST['delete-comment'])){
+            DBManagerComments::deleteComment($_POST['commentId']);
+            $this->viewUser($_POST['userId']);
         } else if (isset($_POST['add'])) {
             $_SESSION['error-message'] = '';
             $errorMsg = '';
