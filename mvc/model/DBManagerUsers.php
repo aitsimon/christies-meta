@@ -124,6 +124,34 @@ class DBManagerUsers
             return $check;
         }
     }
+    public static function getAllEmails(){
+        $dbm = Connection::access();
+        try {
+            $clause = 'SELECT email from user';
+            $results = $dbm->query($clause);
+            $emails = array();
+            foreach ($results as $result){
+                $emails[]=$result['email'];
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return $emails;
+        }
+    }
+    public static function getMaxId(){
+        $dbm = Connection::access();
+        try {
+            $sql = 'SELECT MAX(user_id) from user';
+            $result = $dbm->query();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return (int)$result[0];
+        }
+    }
 
 
 

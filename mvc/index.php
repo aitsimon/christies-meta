@@ -35,7 +35,23 @@ if (isset($array_path[0]) && $array_path[0] === 'admin' && $array_path[1] === 'l
         $controller->showLogin();
     }
 } else if (isset($array_path[0]) && $array_path[0] !== 'admin') {
-    $front_controller->showHome();
+    if($array_path[0]==='home' && !isset($array_path[1])){
+        $front_controller->showHome();
+    }else if(isset($array_path[0]) && $array_path[0]==='list'){
+       $front_controller->showList();
+    }else if(isset($array_path[0]) && $array_path[0]==='contact'){
+        $front_controller->showContact();
+     }else if(isset($array_path[0]) && $array_path[0]==='login'){
+        $front_controller->showLogin();
+     }else if(isset($array_path[0]) && $array_path[0]==='signup'){
+        if(!isset($array_path[1])){
+            $front_controller->showSignup();
+        }else{
+            $front_controller->procesSignup();
+        }
+     }else if(isset($array_path[0]) && $array_path[0]==='logout'){
+        $front_controller->logout();
+     }
 } else if (isset($array_path[0], $array_path[2]) && $array_path[1] === 'login' && $array_path[2] === 'process') {
     $controller->processLogin();
 } else if ($array_path[1] === 'dashboard' && !isset($array_path[2])) {
