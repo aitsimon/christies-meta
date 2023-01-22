@@ -154,4 +154,21 @@ class DBManagerCategories
             return $newId;
         }
     }
+    public static function getAllNames(){
+        $dbm = Connection::access();
+        try {
+            $clause = 'SELECT * FROM categories';
+            $stmt = $dbm->query($clause);
+            $result = $stmt->fetchAll();
+            $categories = [];
+            foreach ($result as $r){
+                $categories[] = [$r['cat_id'],$r['name']];
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return $categories;
+        }
+    }
 }

@@ -1,7 +1,7 @@
 <?php
 $url = '';
 if(!isset($_SERVER['HTTP_REFERER'])) {
-    $_SERVER['HTTP_REFERER']='http://localhost/christies-meta/';
+    $_SERVER['HTTP_REFERER']='http://localhost/christies-meta/mvc';
 }
 $component = explode('/', $_SERVER['HTTP_REFERER']);
 for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
@@ -36,6 +36,7 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
     <!-- Bootsrap 5 CSS + JS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="view/front/styles/template-front.css">
 </head>
 <body class="wrapper">
     <?php
@@ -43,15 +44,15 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
     ?>
     <div id="content" class="container">
         <?php 
-            require_once $content;   
+            require_once $content;
         ?>
     </div>
-    <?php
-         require_once 'view/front/footer.php';
-    ?>
+    <div>
+        <?php
+        require 'view/front/footer.php';
+        ?>
+    </div>
     <script src="view/admin/plugins/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- ChartJS -->
     <script src="view/admin/plugins/chart.js/Chart.min.js"></script>
     <!-- Sparkline -->

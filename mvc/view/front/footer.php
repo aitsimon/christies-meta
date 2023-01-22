@@ -8,10 +8,10 @@
             </a>
 
             <ul class="nav col-md-4 justify-content-end">
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">List</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Contact</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Privacy Policy</a></li>
+                <li class="nav-item"><a href="./index.php/home" class="nav-link px-2 text-muted">Home</a></li>
+                <li class="nav-item"><a href="./index.php/list" class="nav-link px-2 text-muted">List</a></li>
+                <li class="nav-item"><a href="./index.php/contact" class="nav-link px-2 text-muted">Contact</a></li>
+                <li class="nav-item"><a href="./index.php/home" class="nav-link px-2 text-muted">Privacy Policy</a></li>
             </ul>
         </footer>
     </div>

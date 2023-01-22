@@ -12,6 +12,7 @@ require ('./model/DBManagerCategories.php');
 require ('./model/DBManagerComments.php');
 require ('./model/DBManagerObject.php');
 require ('./model/DBManagerPurchases.php');
+require ('./model/DBMScore.php');
 //Instancio el controlador
 $controller = new Controller();
 $front_controller = new FrontController();
@@ -38,18 +39,29 @@ if (isset($array_path[0]) && $array_path[0] === 'admin' && $array_path[1] === 'l
     if($array_path[0]==='home' && !isset($array_path[1])){
         $front_controller->showHome();
     }else if(isset($array_path[0]) && $array_path[0]==='list'){
-       $front_controller->showList();
+        if(!isset($array_path[1])) {
+            $front_controller->showList();
+        }else{
+            $front_controller->showProduct($array_path[1]);
+        }
+
     }else if(isset($array_path[0]) && $array_path[0]==='contact'){
         $front_controller->showContact();
      }else if(isset($array_path[0]) && $array_path[0]==='login'){
-        $front_controller->showLogin();
+        if(!isset($array_path[1])) {
+            $front_controller->showLogin();
+        }else{
+            $front_controller->processLogin();
+        }
      }else if(isset($array_path[0]) && $array_path[0]==='signup'){
         if(!isset($array_path[1])){
             $front_controller->showSignup();
         }else{
             $front_controller->procesSignup();
         }
-     }else if(isset($array_path[0]) && $array_path[0]==='logout'){
+     }else if(isset($array_path[0]) && $array_path[0]==='navsearch'){
+        $front_controller->logout();
+    }else if(isset($array_path[0]) && $array_path[0]==='logout'){
         $front_controller->logout();
      }
 } else if (isset($array_path[0], $array_path[2]) && $array_path[1] === 'login' && $array_path[2] === 'process') {

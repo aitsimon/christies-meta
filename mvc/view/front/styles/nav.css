@@ -1,0 +1,21 @@
+#signUpNavBtn{
+    background-color: #00D1B2;
+    color: whitesmoke;
+
+}
+#signUpNavBtn:hover{
+    background-color: whitesmoke;
+    color: #00D1B2
+}
+#loginNavBtn{
+    background-color: whitesmoke;
+    color: #00D1B2;
+    border:1px solid #00D1B2;
+}
+#loginNavBtn:hover{
+    background-color: #00D1B2;
+    color: whitesmoke;
+}
+li>a:active{
+    color: red;
+}

@@ -1,5 +1,6 @@
+<link rel="stylesheet" href="view/front/styles/loginForm.css">
 <div class="container  d-flex align-items-center justify-content-center">
-    <div id="formLogin">
+    <div id="formSignup" class="my-5">
         <form class="row g-3" method="post" action="./index.php/signup/process">
             <div class="form-group">
                 <label for="userEmail" class="form-label">Email</label>
@@ -34,4 +35,4 @@
         </form>
     </div>
 </div>
-<script type="text/javascript" src="view/front/front-scripts/signup-check.js">
+<script type="text/javascript" src="view/front/front-scripts/signup-check.js"></script>

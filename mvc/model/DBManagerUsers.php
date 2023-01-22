@@ -51,7 +51,26 @@ class DBManagerUsers
             return $user;
         }
     }
-
+    public static function getUserByEmail($userEmail)
+    {
+        $dbm = Connection::access();
+        try {
+            $clause = 'SELECT * FROM user WHERE email = ?';
+            $stmt = $dbm->prepare($clause);
+            $stmt->execute([$userEmail]);
+            $result = $stmt->fetch();
+            if ($stmt->execute([$userEmail])) {
+                $user = new User($result['user_id'], $result['email'], $result['password'], $result['rol'],$result['tokens'],$result['telph']);
+            } else {
+                $user = false;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return $user;
+        }
+    }
     /**
      * @param $email string Email address of the new user
      * @param $password string Password of the new user

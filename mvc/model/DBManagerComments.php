@@ -72,6 +72,26 @@ class DBManagerComments
             return $comments;
         }
     }
+    public static function getCommentsByObjectId($objectId)
+    {
+        $dbm = Connection::access();
+        try {
+            $clause = "SELECT * FROM comments where object_id = ?";
+            $stmt = $dbm->prepare($clause);
+            $stmt->execute([$objectId]);
+            $results = $stmt->fetchAll();
+            $comments = array();
+            foreach ($results as $result) {
+                $comment = new Comment($result['com_id'], $result['content'], $result['date'], $result['object_id'], $result['user_id']);
+                $comments[] = $comment;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return $comments;
+        }
+    }
     /**
      * @param $content string Content of the current comment that it's going to be inserted in the Data Base.
      * @param $object_id int Id of the object where comment is going to be placed in

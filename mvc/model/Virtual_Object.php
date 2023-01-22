@@ -4,8 +4,8 @@ class Virtual_Object
 {
     public int $object_id;
     public string $name;
-    public  $lat;
-    public  $lon;
+    public $lat;
+    public $lon;
     public float $price;
     public string $img1;
     public $img2;
@@ -16,12 +16,12 @@ class Virtual_Object
     {
         $this->object_id = $object_id;
         $this->name = $name;
-        $this->lat = $lat || NULL;
-        $this->lon = $lon || NULL;
+        $this->lat = $lat ?? NULL;
+        $this->lon = $lon ?? NULL;
         $this->price = $price;
         $this->img1 = $img1;
-        $this->img2 = $img2 || NULL;
-        $this->img3 = $img3 || NULL;
+        $this->img2 = $img2 ?? NULL;
+        $this->img3 = $img3 ?? NULL;
         $this->cat_id = $cat_id;
     }
 
@@ -72,7 +72,7 @@ class Virtual_Object
     }
 
 
-    public function setLat(string $lat): void
+    public function setLat($lat): void
     {
         $this->lat = $lat;
     }
@@ -82,7 +82,7 @@ class Virtual_Object
         return $this->lon;
     }
 
-    public function setLon(string $lon): void
+    public function setLon($lon): void
     {
         $this->lon = $lon;
     }

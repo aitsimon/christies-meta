@@ -8,7 +8,24 @@ class FrontController
     public function showlogin(){
         $info['title'] = 'Login';
         $this->load_view('view/front/login.php','view/front/template-front.php',$info);
-    } public function showSignup(){
+    }
+    public function processLogin(){
+        $emailEntered =$_POST['userEmail'];
+        $passwordEntered = $_POST['userPassword'];
+
+        if(DBAdmin::loginFront($emailEntered,$passwordEntered)){
+            header("Location: ../home");
+
+            $_SESSION['front-login'] = true;
+            $user = DBManagerUsers::getUserByEmail($emailEntered);
+            $_SESSION['front-userId'] = $user->getUserId();
+            $_SESSION['userLogedIn']=$user;
+        }else{
+            $_SESSION['error-message-front'] = 'Invalid credentials given. Please try again.';
+           header("Location: ../login");
+        }
+    }
+    public function showSignup(){
         $info['title'] = 'Sign up';
         $this->load_view('view/front/signup.php','view/front/template-front.php',$info);
     }
@@ -96,15 +113,41 @@ class FrontController
     }
     public function logout(){
         $info['title'] = 'Logout';
-        $this->load_view('view/front/login.php','view/front/template-front.php',$info);
+        session_destroy();
+        header("Location: home");
+
     }
     public function showHome()
     {
         $info['title'] = 'Home';
         $this->load_view('view/front/home.php','view/front/template-front.php',$info);
     }
-    public function showList(){
+    public function processNavSearch(){
+        $objects = DBManagerObject::getObjectsByName($_POST['search']);
+        $_SESSION['objects-to-show'] = $objects;
+        $this->showList();
+    }
+    public function showListDefault(){
 
+    }
+    public function showList(){
+        $info =array();
+        $objects = DBManagerObject::getObjectsByName('trip');
+        $_SESSION['objects-to-show'] = $objects;
+        if(isset($_SESSION['objects-to-show'])){
+            $info['objects'] =$_SESSION['objects-to-show'];
+        }
+        $info['title'] = 'List';
+        $categoriesNames = DBManagerCategories::getAllNames();
+        $info['possibleCategories']=$categoriesNames;
+        $this->load_view('view/front/list.php','view/front/template-front.php',$info);
+    }
+    public function showProduct($productId){
+        $object = DBManagerObject::getObjectById($productId);
+        $info['object'] = $object;
+        $info['title'] = 'Overview '.$object->getName();
+        $info['commentsOfObject'] = DBManagerComments::getCommentsByObjectId($object->getObjectId());
+        $this->load_view('view/front/product.php','view/front/template-front.php',$info);
     }
     public function showContact(){
         

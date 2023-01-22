@@ -39,7 +39,7 @@ class DBManagerObject
             $stmt->execute([(int)$object_id]);
             $result = $stmt->fetch();
             if ($stmt->execute([$object_id])) {
-                $object = new Virtual_Object($result['object_id'], $result['name'], $result['lat'], $result['lon'], $result['price'], $result['img1'], $result['img2'], $result['img3'], $result['cat_id']);
+                $object = new Virtual_Object($result['object_id'], $result['name'], (float) $result['lat'], (float) $result['lon'], $result['price'], $result['img1'], $result['img2'], $result['img3'], $result['cat_id']);
             } else {
                 $object = false;
             }
@@ -48,6 +48,26 @@ class DBManagerObject
         } finally {
             $dbm = null;
             return $object;
+        }
+    }
+    public static function getObjectsByName($name)
+    {
+        $dbm = Connection::access();
+        try {
+            $clause = "SELECT * FROM object where name like concat('%', ?, '%')";
+            $stmt = $dbm->prepare($clause);
+            $stmt->execute([$name]);
+            $results = $stmt->fetchAll();
+            $objects = array();
+            foreach ($results as $result) {
+                $object = new Virtual_Object($result['object_id'], $result['name'], $result['lat'], $result['lon'], $result['price'], $result['img1'], $result['img2'], $result['img3'], $result['cat_id']);
+                $objects[] = $object;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return $objects;
         }
     }
 
