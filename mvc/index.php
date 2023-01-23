@@ -41,10 +41,13 @@ if (isset($array_path[0]) && $array_path[0] === 'admin' && $array_path[1] === 'l
     }else if(isset($array_path[0]) && $array_path[0]==='list'){
         if(!isset($array_path[1])) {
             $front_controller->showList();
+        }else if($array_path[1]==='comment'){
+            $front_controller->addComment();
+        }else if($array_path==='buy'){
+
         }else{
             $front_controller->showProduct($array_path[1]);
         }
-
     }else if(isset($array_path[0]) && $array_path[0]==='contact'){
         $front_controller->showContact();
      }else if(isset($array_path[0]) && $array_path[0]==='login'){
@@ -61,6 +64,8 @@ if (isset($array_path[0]) && $array_path[0] === 'admin' && $array_path[1] === 'l
         }
      }else if(isset($array_path[0]) && $array_path[0]==='navsearch'){
         $front_controller->logout();
+    }else if(isset($array_path[0]) && $array_path[0]==='profile'){
+        $front_controller->showProfile();
     }else if(isset($array_path[0]) && $array_path[0]==='logout'){
         $front_controller->logout();
      }

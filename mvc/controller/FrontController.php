@@ -2,34 +2,44 @@
 
 class FrontController
 {
-    public function load_view($content,$template,$info){
+    public function load_view($content, $template, $info)
+    {
         require($template);
     }
-    public function showlogin(){
+
+    public function showlogin()
+    {
         $info['title'] = 'Login';
-        $this->load_view('view/front/login.php','view/front/template-front.php',$info);
+        $this->load_view('view/front/login.php', 'view/front/template-front.php', $info);
     }
-    public function processLogin(){
-        $emailEntered =$_POST['userEmail'];
+
+    public function processLogin()
+    {
+        $emailEntered = $_POST['userEmail'];
         $passwordEntered = $_POST['userPassword'];
 
-        if(DBAdmin::loginFront($emailEntered,$passwordEntered)){
+        if (DBAdmin::loginFront($emailEntered, $passwordEntered)) {
             header("Location: ../home");
 
             $_SESSION['front-login'] = true;
             $user = DBManagerUsers::getUserByEmail($emailEntered);
             $_SESSION['front-userId'] = $user->getUserId();
-            $_SESSION['userLogedIn']=$user;
-        }else{
+            $_SESSION['userLogedIn'] = $user;
+        } else {
             $_SESSION['error-message-front'] = 'Invalid credentials given. Please try again.';
-           header("Location: ../login");
+            header("Location: ../login");
         }
     }
-    public function showSignup(){
+
+    public function showSignup()
+    {
+
         $info['title'] = 'Sign up';
-        $this->load_view('view/front/signup.php','view/front/template-front.php',$info);
+        $this->load_view('view/front/signup.php', 'view/front/template-front.php', $info);
     }
-    public function procesSignup(){
+
+    public function procesSignup()
+    {
         $_SESSION['error-message-front'] = '';
         $errorMsg = '';
         $check = true;
@@ -39,18 +49,18 @@ class FrontController
         $newTokens = 100.00;
         $newTelph = $_POST['userTelph'];
         $usedEmails = DBManagerUsers::getAllEmails();
-        if($newEmail==='') {
+        if ($newEmail === '') {
             $errorMsg .= 'Password field is empty';
             $check = false;
-        }else{
+        } else {
             $emailRegex = "/^([\w\!\#$\%\&\'\*\+\-\/\=\?\^\`{\|\}\~]+\.)*[\w\!\#$\%\&\'\*\+\-\/\=\?\^\`{\|\}\~]+@((((([a-z0-9]{1}[a-z0-9\-]{0,62}[a-z0-9]{1})|[a-z])\.)+[a-z]{2,6})|(\d{1,3}\.){3}\d{1,3}(\:\d{1,5})?)$/i";
-            if(!preg_match($emailRegex,$newEmail)){
-                $check=false;
+            if (!preg_match($emailRegex, $newEmail)) {
+                $check = false;
                 $errorMsg .= 'Email field invalid. Example: user@mail.com';
             }
-            if(in_array($newEmail,$usedEmails,false)){
-                $check=false;
-                $errorMsg =  'This email has already been used. Try with another one.';
+            if (in_array($newEmail, $usedEmails, false)) {
+                $check = false;
+                $errorMsg = 'This email has already been used. Try with another one.';
             }
         }
         if ($newPassword === '') {
@@ -102,55 +112,93 @@ class FrontController
             }
         }
         if ($check) {
-            DBManagerUsers::insertUser($_POST['userEmail'],$newPassword,$newRol,$newTelph);
+            DBManagerUsers::insertUser($_POST['userEmail'], $newPassword, $newRol, $newTelph);
             $this->showHome();
             $_SESSION['front-login'] = true;
-            $_SESSION['front-userId'] = DBManagerUsers::getMaxId()+1;
+            $_SESSION['front-userId'] = DBManagerUsers::getMaxId() + 1;
         } else {
             $_SESSION['error-message-front'] = $errorMsg;
             $this->showSignup();
         }
     }
-    public function logout(){
+
+    public function logout()
+    {
         $info['title'] = 'Logout';
         session_destroy();
         header("Location: home");
 
     }
+
     public function showHome()
     {
         $info['title'] = 'Home';
-        $this->load_view('view/front/home.php','view/front/template-front.php',$info);
+        $this->load_view('view/front/home.php', 'view/front/template-front.php', $info);
     }
-    public function processNavSearch(){
+
+    public function processNavSearch()
+    {
         $objects = DBManagerObject::getObjectsByName($_POST['search']);
         $_SESSION['objects-to-show'] = $objects;
         $this->showList();
     }
-    public function showListDefault(){
+
+    public function showListDefault()
+    {
 
     }
-    public function showList(){
-        $info =array();
+
+    public function showList()
+    {
+        $info = array();
         $objects = DBManagerObject::getObjectsByName('trip');
         $_SESSION['objects-to-show'] = $objects;
-        if(isset($_SESSION['objects-to-show'])){
-            $info['objects'] =$_SESSION['objects-to-show'];
+        if (isset($_SESSION['objects-to-show'])) {
+            $info['objects'] = $_SESSION['objects-to-show'];
         }
         $info['title'] = 'List';
         $categoriesNames = DBManagerCategories::getAllNames();
-        $info['possibleCategories']=$categoriesNames;
-        $this->load_view('view/front/list.php','view/front/template-front.php',$info);
+        $info['possibleCategories'] = $categoriesNames;
+        $this->load_view('view/front/list.php', 'view/front/template-front.php', $info);
     }
-    public function showProduct($productId){
+
+    public function showProduct($productId)
+    {
         $object = DBManagerObject::getObjectById($productId);
         $info['object'] = $object;
-        $info['title'] = 'Overview '.$object->getName();
+        $info['title'] = 'Overview ' . $object->getName();
         $info['commentsOfObject'] = DBManagerComments::getCommentsByObjectId($object->getObjectId());
-        $this->load_view('view/front/product.php','view/front/template-front.php',$info);
+        $this->load_view('view/front/product.php', 'view/front/template-front.php', $info);
     }
-    public function showContact(){
-        
+
+    public function addComment()
+    {
+        $content = $_POST['commentContent'];
+        $objectId = $_POST['commentObjectId'];
+        $userId = $_POST['commentUserId'];
+        $check = DBManagerComments::insertComment($content, $objectId, $userId);
+        if ($check) {
+            $check2 = DBMScore::getScoreProductById($objectId);
+            if (!$check2) {
+                DBMScore::insertNewScore($objectId);
+            } else {
+                DBMScore::updateScore($objectId, $check2 + 1);
+            }
+        }
+        header('Location: ../list/' . $objectId);
+    }
+
+    public function showProfile()
+    {
+        require('model/session-control-front.php');
+        $info['title'] = 'Profile';
+        $info['user'] = DBManagerUsers::getUserById($_SESSION['front-userId']);
+        $this->load_view('view/front/profile.php', 'view/front/template-front.php', $info);
+    }
+
+    public function showContact()
+    {
+
     }
 
 }
