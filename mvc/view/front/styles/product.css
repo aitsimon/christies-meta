@@ -1,6 +1,9 @@
 #objectDescription{
     text-align: justify;
 }
+.price-label{
+    background-color: #00D1B2;
+}
 /* external css: flickity.css, fullscreen.css */
 
 * { box-sizing: border-box; }

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="view/front/styles/list.css">
 <div id="list">
     <div id="filters" class="container">
         <div class="filter col-3 d-flex ">
@@ -22,7 +23,7 @@
                                 echo '<div class="products d-flex justify-content-around align-items-center w-100 col-12">';
                                     echo '<div class="col-4 h-100 pl-2 productsNamePrice d-flex flex-column flex-wrap align-items-center justify-content-around">';
                                         echo '<h4 class="h4 my-3 text-break">'.$object->getName().'</h4>';
-                                        echo '<a class="btn btn-outline-info my-3">'.$object->getPrice().'₣</a>';
+                                        echo '<a class="btn price-tag my-3">'.$object->getPrice().'₣</a>';
                                     echo '</div>';
                                     echo '<img class="col-8" src="'.$object->getImg1().'">';
                                 echo '</div>';
@@ -30,7 +31,7 @@
                         echo '</h2>';
                         echo '<div id="collapse'.$object->getObjectId().'" class="accordion-collapse collapse" aria-labelledby="heading'.$object->getObjectId().'" data-bs-parent="#accordionObjects">';
                             echo '<div class="accordion-body d-flex justify-content-center align-content-center">';
-                                echo '<a href="./index.php/list/'.$object->getObjectId().'" class="btn btn-info text-white mb-4">View Product <i class="fas fa-object-group"></i></a>';
+                                echo '<a href="./index.php/list/'.$object->getObjectId().'" class="btn price-label text-white mb-4">View Product <i class="fas fa-object-group"></i></a>';
                             echo '</div>';
                         echo '</div>';
                     echo'</div>';

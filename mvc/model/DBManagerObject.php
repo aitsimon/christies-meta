@@ -164,4 +164,27 @@ class DBManagerObject
             return $newId;
         }
     }
+    public static function getAllPurchasedObjectsByUser($user_id)
+    {
+        $dbm = Connection::access();
+        try {
+            $clause = "SELECT * from object JOIN purchases on object.object_id=purchases.object_id join user on purchases.user_id=user.user_id where user.user_id=?";
+            $stmt = $dbm->prepare($clause);
+            $stmt->execute([(int)$user_id]);
+            $results = $stmt->fetchAll();
+            $objects = false;
+            if ($stmt->execute([$user_id])) {
+                $objects = array();
+                foreach ($results as $result) {
+                    $object = new Virtual_Object($result['object_id'], $result['name'], $result['lat'], $result['lon'], $result['price'], $result['img1'], $result['img2'], $result['img3'], $result['cat_id']);
+                    $objects[]=$object;
+                }
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return $objects;
+        }
+    }
 }

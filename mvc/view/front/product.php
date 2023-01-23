@@ -65,13 +65,20 @@
             </div>
             <?php
                 if(isset($_SESSION['front-login'])){
-                echo '<div class="d-flex justify-content-center  align-items-center">';
-                echo '<a href="./index.php/list/buy/'.$info['object']->getObjectId().'"><button class="btn btn-primary d-flex flex-row justify-content-between align-items-center text-white"><span class="me-4 h4 mt-0 mb-0">Buy</span><i class="fas fa-cart-plus fa-lg"></i></button></a>';
-                echo '</div>';
+                echo '<div class="d-flex justify-content-around my- align-items-center col-12">';
+                    echo '<span class="h4 price-label mb-0 text-white border rounded p-1">'.$info['object']->getPrice().' ₣</span>';
+                    echo '<a class="" href="./index.php/list/buy/'.$info['object']->getObjectId().'"><button class="btn btn-primary d-flex flex-row justify-content-between align-items-center text-white"><span class="me-4 h4 mt-0 mb-0">Buy</span><i class="fas fa-cart-plus fa-lg"></i></button></a>';
+                    echo '</div>';
                 if(isset($_SESSION['error-message-purchase'])){
                     echo '<span class="text-danger">'.$_SESSION['error-message-purchase'].'</span>';
                 }
-            }
+            }else{
+                    echo '<div class="d-flex justify-content-around my- align-items-center col-12">';
+                    echo '<span class="h4 price-label mb-0 text-white border rounded p-1">'.$info['object']->getPrice().' ₣</span>';
+                    echo '</div>';
+
+                }
+
             ?>
         </div>
     </div>

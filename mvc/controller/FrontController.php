@@ -238,7 +238,7 @@ class FrontController
         header('Location: ../home');
     }
     public function processBuy($product_id){
-        $user = DBManagerUsers::getUserById($_SESSION['userLogedIn']);
+        $user = DBManagerUsers::getUserById($_SESSION['front-userId']);
         $object = DBManagerObject::getObjectById($product_id);
 
         if($user->getTokens()>=$object->getPrice()){
