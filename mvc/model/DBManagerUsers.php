@@ -121,6 +121,23 @@ class DBManagerUsers
             return $check;
         }
     }
+    public static function updateUserTokens($tokens, $user_id)
+    {
+        $dbm = Connection::access();
+        try {
+            $check = false;
+            $clause = "UPDATE user SET tokens = ? WHERE user_id = ?";
+            $stmt = $dbm->prepare($clause);
+            if ($stmt->execute([$tokens, $user_id])) {
+                $check = true;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return $check;
+        }
+    }
 
     /**
      * @param $user_id int Id of the user to be deleted

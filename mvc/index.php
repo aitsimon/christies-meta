@@ -13,6 +13,7 @@ require ('./model/DBManagerComments.php');
 require ('./model/DBManagerObject.php');
 require ('./model/DBManagerPurchases.php');
 require ('./model/DBMScore.php');
+require ('./model/Mailer2.php');
 //Instancio el controlador
 $controller = new Controller();
 $front_controller = new FrontController();
@@ -43,13 +44,17 @@ if (isset($array_path[0]) && $array_path[0] === 'admin' && $array_path[1] === 'l
             $front_controller->showList();
         }else if($array_path[1]==='comment'){
             $front_controller->addComment();
-        }else if($array_path==='buy'){
-
+        }else if($array_path[1]==='buy'){
+            $front_controller->processBuy($array_path[2]);
         }else{
             $front_controller->showProduct($array_path[1]);
         }
     }else if(isset($array_path[0]) && $array_path[0]==='contact'){
-        $front_controller->showContact();
+       if(!isset($array_path[1])){
+           $front_controller->showContact();
+       }else{
+            $front_controller->processContact();
+       }
      }else if(isset($array_path[0]) && $array_path[0]==='login'){
         if(!isset($array_path[1])) {
             $front_controller->showLogin();

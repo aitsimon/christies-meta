@@ -13,8 +13,7 @@
                 $obj = $info['object'];
 
                 echo '<div class="carousel-cell">';
-                echo '<img class="carousel-cell-image"
-                         data-flickity-lazyload="' . $obj->getImg1() . '" />';
+                echo '<img class="carousel-cell-image" data-flickity-lazyload="'. $obj->getImg1() .'" />';
                 echo '</div>';
                 if ($obj->getImg2() != null) {
                     echo '<div class="carousel-cell">';
@@ -67,8 +66,11 @@
             <?php
                 if(isset($_SESSION['front-login'])){
                 echo '<div class="d-flex justify-content-center  align-items-center">';
-                echo '<button class="btn btn-primary d-flex flex-row justify-content-between align-items-center text-white"><span class="me-4 h4 mt-0 mb-0">Buy</span><i class="fas fa-cart-plus fa-lg"></i></button>';
+                echo '<a href="./index.php/list/buy/'.$info['object']->getObjectId().'"><button class="btn btn-primary d-flex flex-row justify-content-between align-items-center text-white"><span class="me-4 h4 mt-0 mb-0">Buy</span><i class="fas fa-cart-plus fa-lg"></i></button></a>';
                 echo '</div>';
+                if(isset($_SESSION['error-message-purchase'])){
+                    echo '<span class="text-danger">'.$_SESSION['error-message-purchase'].'</span>';
+                }
             }
             ?>
         </div>
@@ -117,10 +119,10 @@
         <?php
         foreach ($info['commentsOfObject'] as $comment) {
             echo '<div class=" review d-flex flex-row py-2 mb-2 px-1 justify-content-center align-items-center flex-wrap border border-dark rounded">';
-                    echo '<div class="d-flex flex-row col-12 justify-content-start align-items-center">
+                    echo '<div class="d-flex flex-row col-12 justify-content-center justify-content-md-start align-items-center">
                               <img class="" width="50" height="50" src="https://cdn.pixabay.com/photo/2021/06/07/13/45/user-6318003__340.png">
-                              <span class="col-6">'.(DBManagerUsers::getUserById($comment->getUserId()))->getEmail().'</span>';
-                              echo '<span class="col-3 text-black-50">'.$comment->getDate().'</span>';
+                              <span class="col-6 col-md-9">'.(DBManagerUsers::getUserById($comment->getUserId()))->getEmail().'</span>';
+                              echo '<span class="col-3 col-md-2 text-black-50">'.$comment->getDate().'</span>';
                      echo '</div>';
                     echo '<div class="col-12 d-flex flex-row justify-content-start col-12">';
                         echo '<span class="col-12">'.$comment->getContent().'</span>';

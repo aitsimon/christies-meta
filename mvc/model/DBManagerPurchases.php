@@ -7,7 +7,7 @@ class DBManagerPurchases
     /**
      * @return array of all the purchases in the database
      */
-    public function getAll()
+    public static function getAll()
     {
         $dbm = Connection::access();
         try {
@@ -30,7 +30,7 @@ class DBManagerPurchases
      * @param $purch_id integer the id of the purchase
      * @return false if no purchase is found or an Object Virtual_Object.php if it already exists
      */
-    public function getPurchaseById($purch_id)
+    public static function getPurchaseById($purch_id)
     {
         $dbm = Connection::access();
         try {
@@ -56,7 +56,7 @@ class DBManagerPurchases
      * @param $user_id  integer The ID of the user that has made the transaction
      * @return bool True if the transaction was successfully, false otherwise
      */
-    public function insertPurchase($object_id,$user_id)
+    public static function insertPurchase($object_id,$user_id)
     {
         $dbm = Connection::access();
         try {
@@ -79,7 +79,7 @@ class DBManagerPurchases
      * @param $user_id integer The ID of the user
      * @return bool True if the object has been modified successfully, false otherwise
      */
-    public function updateObject($object_id,$user_id)
+    public static function updateObject($object_id,$user_id)
     {
         $dbm = Connection::access();
         try {
@@ -101,7 +101,7 @@ class DBManagerPurchases
      * @param $purch_id int Id of the purchase to be deleted
      * @return bool true if the purchases is deleted, false otherwise
      */
-    public function deletePurchase($purch_id)
+    public static function deletePurchase($purch_id)
     {
         $dbm = Connection::access();
         try {

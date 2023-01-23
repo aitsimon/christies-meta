@@ -43,22 +43,22 @@ class FrontController
         $_SESSION['error-message-front'] = '';
         $errorMsg = '';
         $check = true;
-        $newEmail = $_POST['userEmail'];
+        $userEmail = $_POST['userEmail'];
         $newPassword = $_POST['userPassword'];
         $newRol = $_POST['userRol'];
         $newTokens = 100.00;
         $newTelph = $_POST['userTelph'];
         $usedEmails = DBManagerUsers::getAllEmails();
-        if ($newEmail === '') {
+        if ($userEmail === '') {
             $errorMsg .= 'Password field is empty';
             $check = false;
         } else {
             $emailRegex = "/^([\w\!\#$\%\&\'\*\+\-\/\=\?\^\`{\|\}\~]+\.)*[\w\!\#$\%\&\'\*\+\-\/\=\?\^\`{\|\}\~]+@((((([a-z0-9]{1}[a-z0-9\-]{0,62}[a-z0-9]{1})|[a-z])\.)+[a-z]{2,6})|(\d{1,3}\.){3}\d{1,3}(\:\d{1,5})?)$/i";
-            if (!preg_match($emailRegex, $newEmail)) {
+            if (!preg_match($emailRegex, $userEmail)) {
                 $check = false;
                 $errorMsg .= 'Email field invalid. Example: user@mail.com';
             }
-            if (in_array($newEmail, $usedEmails, false)) {
+            if (in_array($userEmail, $usedEmails, false)) {
                 $check = false;
                 $errorMsg = 'This email has already been used. Try with another one.';
             }
@@ -198,6 +198,61 @@ class FrontController
 
     public function showContact()
     {
+        $info['title'] = 'Contact Form';
+        $this->load_view('view/front/contact.php','view/front/template-front.php',$info);
+
+    }
+    public function processContact(){
+        $_SESSION['error-message'] = '';
+        $errorMsg = '';
+        $check = true;
+
+        $userEmail = $_POST['userEmail'];
+        $userName = $_POST['userName'];
+        $commentContent = $_POST['userComment'];
+
+        if ($userEmail === '') {
+            $errorMsg .= 'Email field is empty';
+            $check = false;
+        } else {
+            $regex = '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
+            if (!preg_match($regex, $userEmail)) {
+                $errorMsg .= 'Email field invalid. Enter a valid email address.';
+                $check = false;
+            }
+        }
+        if ($commentContent === '') {
+            $errorMsg .= 'Comment field is empty';
+            $check = false;
+        } else {
+            $regex = '/^[\s\w]{10,}$/';
+            if (!preg_match($regex, $commentContent)) {
+                $errorMsg .= '';
+                $check = false;
+            }
+        }
+        if ($check) {
+            $mailer = new Mailer2('comercioaitor@gmail.com','comercioaitor@gmail.com','Contact Form from:'.$_POST['userEmail'],$_POST['userComment']);
+            $mailer->mandarMail();
+        }
+        header('Location: ../home');
+    }
+    public function processBuy($product_id){
+        $user = DBManagerUsers::getUserById($_SESSION['userLogedIn']);
+        $object = DBManagerObject::getObjectById($product_id);
+
+        if($user->getTokens()>=$object->getPrice()){
+            $prevTokens = $user->getTokens();
+            $check = DBManagerPurchases::insertPurchase($object->getObjectId(),$user->getUserId());
+            if($check){
+              $newTokens = $prevTokens-($object->getPrice());
+              DBManagerUsers::updateUserTokens($newTokens,$user->getUserId());
+              header("Location: ../../profile");
+            }
+        }else{
+            $_SESSION['error-message-purchase'] = "You don't have enough tokens to purchase this product.";
+            header("Location: ..");
+        }
 
     }
 

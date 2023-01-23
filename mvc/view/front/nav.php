@@ -17,7 +17,7 @@
             <input type="search" name="search" id="search" class="form-control searchInputNav" placeholder="Search by name..." aria-label="Search">
           </form>
             <?php
-              if (isset($_SESSION['front-login'])&& $_SESSION['front-login']==true) {
+              if (isset($_SESSION['front-login']) && $_SESSION['front-login']==true) {
                  echo '<div class="dropdown text-end">';
                     echo ' <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                           <img src="https://cdn.pixabay.com/photo/2021/06/07/13/45/user-6318003__340.png" alt="mdo" width="32" height="32" class="rounded-circle">
@@ -36,7 +36,6 @@
                   echo '</ul>';
                   echo '</div>';
               }
-
             ?>
         </div>
       </div>
@@ -54,7 +53,7 @@
           </ul>
         </div>
 
-        <div class="d-flex align-items-center">
+        <div class="d-flex align-items-center justify-content-end">
           <form class="w-25 me-3 d-none d-sm-block" role="search">
             <input type="search" class="form-control searchInputNav" placeholder="Search by name..." aria-label="Search">
           </form>

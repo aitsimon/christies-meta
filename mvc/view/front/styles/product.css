@@ -1,6 +1,3 @@
-#productWrapper{
-
-}
 #objectDescription{
     text-align: justify;
 }
@@ -17,7 +14,7 @@ body { font-family: sans-serif; }
     cursor: pointer;
 }
 .carousel-cell {
-    width: 100%;
+    width: 600px;
     height: 300px;
     margin-right: 10px;
     /* center images in cells with flexbox */
@@ -26,6 +23,7 @@ body { font-family: sans-serif; }
     justify-content: center;
 }
 
+
 .carousel.is-fullscreen .carousel-cell {
     height: 100%;
 }
@@ -33,6 +31,7 @@ body { font-family: sans-serif; }
 .carousel-cell-image {
     display: block;
     max-height: 100%;
+    max-width: 100%;
 }
 
 .carousel.is-fullscreen .carousel-cell-image {
