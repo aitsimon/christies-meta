@@ -1,5 +1,6 @@
 <?php
-
+include_once 'Connection.php';
+include_once 'model/Virtual_Object.php';
 
 class DBManagerObject
 {
