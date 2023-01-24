@@ -206,4 +206,74 @@ class DBManagerObject
             return $objects;
         }
     }
+    public static function getAllObjectsFromCategory($cat_id)
+    {
+        $dbm = Connection::access();
+        try {
+            $clause = "SELECT * from object where cat_id = ?";
+            $stmt = $dbm->prepare($clause);
+            $stmt->execute([(int)$cat_id]);
+            $results = $stmt->fetchAll();
+            $objects = false;
+            if ($stmt->execute([$cat_id])) {
+                $objects = array();
+                foreach ($results as $result) {
+                    $object = new Virtual_Object($result['object_id'], $result['name'], $result['lat'], $result['lon'], $result['price'], $result['img1'], $result['img2'], $result['img3'], $result['cat_id']);
+                    $objects[]=$object;
+                }
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return $objects;
+        }
+    }
+    public static function getObjectsByLikes($order)
+    {
+        $dbm = Connection::access();
+        try {
+            $clause = "SELECT * from object join score on object.object_id = score.object_id order by score.score_points $order ";
+            $stmt = $dbm->prepare($clause);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            $objects = false;
+            if ($stmt->execute()) {
+                $objects = array();
+                foreach ($results as $result) {
+                    $object = new Virtual_Object($result['object_id'], $result['name'], $result['lat'], $result['lon'], $result['price'], $result['img1'], $result['img2'], $result['img3'], $result['cat_id']);
+                    $objects[]=$object;
+                }
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return $objects;
+        }
+    }
+    public static function getObjectsByPurchases($order)
+    {
+        $dbm = Connection::access();
+        try {
+            $clause = "SELECT * from object join purchases p on object.object_id = p.object_id order by count(object.object_id) $order";
+            $stmt = $dbm->prepare($clause);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            $objects = false;
+            if ($stmt->execute()) {
+                $objects = array();
+                foreach ($results as $result) {
+                    $object = new Virtual_Object($result['object_id'], $result['name'], $result['lat'], $result['lon'], $result['price'], $result['img1'], $result['img2'], $result['img3'], $result['cat_id']);
+                    $objects[]=$object;
+                }
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return $objects;
+        }
+    }
+
 }

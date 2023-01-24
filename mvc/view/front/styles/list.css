@@ -5,6 +5,14 @@
     border-color: #00D1B2;
     color: #00D1B2
 }
+.price-label:hover{
+    background-color: white;
+    color: #00D1B2 !important;
+}
+.price-tag:hover{
+    border-color: white;
+    color: #00D1B2
+}
 /* external css: flickity.css */
 
 

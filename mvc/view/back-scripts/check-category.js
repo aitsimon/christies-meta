@@ -54,7 +54,7 @@ function comprobar(evt) {
             break;
         case 'categoryDescription':
             let descriptionEntered = elemento.value;
-            if(descriptionEntered.length<1000){
+            if(descriptionEntered.length<800){
                 smallError.innerHTML='';
             }else{
                 smallError.innerHTML='Description max length 1000 characters.'

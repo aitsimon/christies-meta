@@ -62,7 +62,7 @@ function checkInd(elm){
             }
             break;
         case 'userComment':
-            let regex = /^[\s\w]{10,}$/;
+            let regex = /^[\s\w]{10,500}$/;
             if (regex.test(element.value)) {
                 if(element.classList.contains('is-invalid')){
                     element.classList.remove('is-invalid');

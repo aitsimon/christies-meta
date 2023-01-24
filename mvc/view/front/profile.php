@@ -5,6 +5,47 @@
         <span class="text-success h5"><strong
                     class="text-dark">Wallet: </strong><?php echo $info['user']->getTokens() ?> ₣</span>
         <span class="h5"><strong>Telephone: </strong><?php echo $info['user']->getTelph() ?></span>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileForm">
+            Edit data or delete account
+        </button>
+        <div class="modal fade" id="editProfileForm" tabindex="-1" aria-labelledby="editUser" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editUser">Edit Profile</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="index.php/profile/edit" method="post">
+                            <input type="hidden" name="commentUserId" value="<?php echo $_SESSION['front-userId']?>">
+                            <div class="form-group d-flex flex-column">
+                                <input type="email" class="form-control" name="userEmail" id="userEmail" placeholder="example@mail.com" required>
+                                <label for="userEmail">Email</label>
+                                <div class="invalid-feedback">
+                                    Please provide a valid email. Example: example@example.com .
+                                </div>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="form-group d-flex flex-column">
+                                <label for="userTelph">Telephone</label>
+                                <input type="text" class="form-control" name="userTelph" id="userTelph" placeholder="+34 155 155 155" required>
+                                <div class="invalid-feedback">
+                                    Invalid number. Example:+34 654321234 or +34 666 666 666.
+                                </div>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-center align-items-center">
+                                <button type="submit" class="btn btn-lg mt-2 btn-primary" data-bs-dismiss="modal">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="userPurchases" class="d-flex flex-column my-5 py-5 justify-content-center align-items-start">
         <h2>Purchased Products: </h2>

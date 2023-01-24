@@ -55,7 +55,7 @@
 
         <div class="d-flex align-items-center justify-content-end">
           <form class="w-25 me-3 d-none d-sm-block" role="search">
-            <input type="search" class="form-control searchInputNav" placeholder="Search by name..." aria-label="Search">
+            <input type="search" class="form-control searchInputNav" id="navSearchForm" placeholder="Search by name..." aria-label="Search">
           </form>
 
             <?php

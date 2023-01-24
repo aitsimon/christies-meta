@@ -1,7 +1,5 @@
 let formSearch = document.getElementById('navSearchForm');
 let iSearch = document.getElementById('search');
-console.log(iSearch);
-console.log(formSearch);
 formSearch.addEventListener('submit', () => {
     event.stopPropagation();
     event.preventDefault();
@@ -17,7 +15,10 @@ formSearch.addEventListener('submit', () => {
         async: true
     }).done((response) => {
         console.log(response);
-        let objects = response;
-        window.location.href ='http://localhost/christies-meta/mvc/index.php/list';
-    });
+        let r = JSON.stringify(response);
+        console.log(r);
+        sessionStorage.setItem('productsSearchedNav',r);
+        window.location.href = 'http://localhost/christies-meta/mvc/index.php/list';
+    })
 });
+

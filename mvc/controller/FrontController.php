@@ -151,15 +151,10 @@ class FrontController
     public function showList()
     {
         $info = array();
-        $objects = DBManagerObject::getObjectsByName('trip');
-        $_SESSION['objects-to-show'] = $objects;
-        if (isset($_SESSION['objects-to-show'])) {
-            $info['objects'] = $_SESSION['objects-to-show'];
-        }
         $info['title'] = 'List';
         $categoriesNames = DBManagerCategories::getAllNames();
         $info['possibleCategories'] = $categoriesNames;
-        $this->load_view('view/front/list.php', 'view/front/template-front.php', $info);
+        $this->load_view('view/front/list.php', 'view/front/template-list.php', $info);
     }
 
     public function showProduct($productId)
