@@ -16,7 +16,8 @@ formSearch.addEventListener('submit', () => {
         },
         async: true
     }).done((response) => {
-        let objects = response.json();
-        console.log(objects);
+        console.log(response);
+        let objects = response;
+        window.location.href ='http://localhost/christies-meta/mvc/index.php/list';
     });
 });

@@ -1,6 +1,5 @@
 <?php
-include_once 'Connection.php';
-include_once 'model/Comment.php';
+
 
 class DBManagerComments
 {

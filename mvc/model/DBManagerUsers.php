@@ -1,7 +1,4 @@
 <?php
-include_once 'Connection.php';
-include_once 'model/User.php';
-
 
 class DBManagerUsers
 {
