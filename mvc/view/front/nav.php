@@ -83,3 +83,4 @@
       </div>
     </header>
   </div>
+<script type="text/javascript" src="view/front/front-scripts/navSearch.js"></script>

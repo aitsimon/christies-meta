@@ -14,6 +14,7 @@ require ('./model/DBManagerObject.php');
 require ('./model/DBManagerPurchases.php');
 require ('./model/DBMScore.php');
 require ('./model/Mailer2.php');
+
 //Instancio el controlador
 $controller = new Controller();
 $front_controller = new FrontController();
@@ -45,7 +46,13 @@ if (isset($array_path[0]) && $array_path[0] === 'admin' && $array_path[1] === 'l
         }else if($array_path[1]==='comment'){
             $front_controller->addComment();
         }else if($array_path[1]==='buy'){
-            $front_controller->processBuy($array_path[2]);
+            if($array_path[2]==='completed'){
+                $front_controller->buyCompleted();
+            }else if($array_path[2]==='error'){
+                $front_controller->buyError();
+            }else{
+                $front_controller->processBuy($array_path[2]);
+            }
         }else{
             $front_controller->showProduct($array_path[1]);
         }

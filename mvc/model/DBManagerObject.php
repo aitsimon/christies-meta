@@ -1,6 +1,5 @@
 <?php
-include_once 'Connection.php';
-include_once 'model/Virtual_Object.php';
+
 
 class DBManagerObject
 {
@@ -68,6 +67,27 @@ class DBManagerObject
         } finally {
             $dbm = null;
             return $objects;
+        }
+    }
+    public static function searchByName($name)
+    {
+        $dbm = Connection::access();
+        try {
+            $clause = "SELECT * FROM object join categories c on object.cat_id = c.cat_id where object.name like concat('%', ?, '%') OR c.name like concat('%', ?, '%')";
+            $stmt = $dbm->prepare($clause);
+            $stmt->execute([$name,$name]);
+            $results = $stmt->fetchAll();
+            $objects = array();
+            foreach ($results as $result) {
+                $object = new Virtual_Object($result['object_id'], $result['name'], $result['lat'], $result['lon'], $result['price'], $result['img1'], $result['img2'], $result['img3'], $result['cat_id']);
+                $objects[] = $object;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            header('Content-Type: application/json');
+            echo json_encode($objects);
         }
     }
 

@@ -1,8 +1,4 @@
 <link rel="stylesheet" href="view/front/styles/product.css">
-<!-- CSS Flickity-->
-<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
-<!-- JavaScript Flickity-->
-<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
 <div id="productWrapper" class="d-flex flex-column justify-content-md-center align-items-center ">
     <div id="productInfo" class="col-12 mt-5 d-flex flex-column flex-md-row justify-content-md-around">
@@ -65,7 +61,7 @@
             </div>
             <?php
                 if(isset($_SESSION['front-login'])){
-                echo '<div class="d-flex justify-content-around my- align-items-center col-12">';
+                echo '<div class="d-flex justify-content-around my-5 my-md-3 align-items-center col-12">';
                     echo '<span class="h4 price-label mb-0 text-white border rounded p-1">'.$info['object']->getPrice().' ₣</span>';
                     echo '<a class="" href="./index.php/list/buy/'.$info['object']->getObjectId().'"><button class="btn btn-primary d-flex flex-row justify-content-between align-items-center text-white"><span class="me-4 h4 mt-0 mb-0">Buy</span><i class="fas fa-cart-plus fa-lg"></i></button></a>';
                     echo '</div>';
@@ -73,7 +69,7 @@
                     echo '<span class="text-danger">'.$_SESSION['error-message-purchase'].'</span>';
                 }
             }else{
-                    echo '<div class="d-flex justify-content-around my- align-items-center col-12">';
+                    echo '<div class="d-flex justify-content-around my-5 my-md-3 align-items-center col-12">';
                     echo '<span class="h4 price-label mb-0 text-white border rounded p-1">'.$info['object']->getPrice().' ₣</span>';
                     echo '</div>';
 
@@ -83,7 +79,7 @@
         </div>
     </div>
     <div id="productComments" class="d-flex flex-column container mt-5 ">
-        <div class="d-flex flex-row justify-content-start align-items-center my-3 my-md-2">
+        <div class="d-flex flex-row justify-content-start align-items-center my-5 my-md-3">
             <h2 class="me-2">Comments</h2>
             <button class="btn btn-primary" <?php
             $check = true;

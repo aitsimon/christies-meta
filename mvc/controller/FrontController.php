@@ -237,7 +237,18 @@ class FrontController
         }
         header('Location: ../home');
     }
+    public function buyCompleted(){
+        require('model/session-control-front.php');
+        $info['title'] = 'Purchase completed';
+        $this->load_view('view/front/buy-completed.php','view/front/template-front.php',$info);
+    }
+    public function buyError(){
+        require('model/session-control-front.php');
+        $info['title'] = 'Purchase error';
+        $this->load_view('view/front/buy-error.php','view/front/template-front.php',$info);
+    }
     public function processBuy($product_id){
+        require('model/session-control-front.php');
         $user = DBManagerUsers::getUserById($_SESSION['front-userId']);
         $object = DBManagerObject::getObjectById($product_id);
 
@@ -247,11 +258,14 @@ class FrontController
             if($check){
               $newTokens = $prevTokens-($object->getPrice());
               DBManagerUsers::updateUserTokens($newTokens,$user->getUserId());
-              header("Location: ../../profile");
+              $_SESSION['bought-object'] = $object->getObjectId();
+              $mailer = new Mailer2('comercioaitor@gmail.com','comercioaitor@gmail.com','Purchase Christies & Meta:'.(DBManagerUsers::getUserById($_SESSION['front-userId']))->getEmail(),'You have successfully purchased an item at Christies & Meta: '.$object->getName());
+              $mailer->mandarMail();
+              header("Location: ./completed");
             }
         }else{
             $_SESSION['error-message-purchase'] = "You don't have enough tokens to purchase this product.";
-            header("Location: ..");
+            header("Location: ./error");
         }
 
     }
