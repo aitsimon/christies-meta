@@ -5,6 +5,7 @@
         <span class="text-success h5"><strong
                     class="text-dark">Wallet: </strong><?php echo $info['user']->getTokens() ?> ₣</span>
         <span class="h5"><strong>Telephone: </strong><?php echo $info['user']->getTelph() ?></span>
+        <span class="text-danger"><?php if(isset($_SESSION['error-message'])){ echo $_SESSION['error-message'];}; ?></span>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileForm">
             Edit data or delete account
         </button>
@@ -15,20 +16,10 @@
                         <h5 class="modal-title" id="editUser">Edit Profile</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body my-2">
                         <form action="index.php/profile/edit" method="post">
-                            <input type="hidden" name="commentUserId" value="<?php echo $_SESSION['front-userId']?>">
-                            <div class="form-group d-flex flex-column">
-                                <input type="email" class="form-control" name="userEmail" id="userEmail" placeholder="example@mail.com" required>
-                                <label for="userEmail">Email</label>
-                                <div class="invalid-feedback">
-                                    Please provide a valid email. Example: example@example.com .
-                                </div>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                            </div>
-                            <div class="form-group d-flex flex-column">
+                            <input type="hidden" name="userId" id="userId" value="<?php echo $_SESSION['front-userId']?>">
+                            <div class="form-group d-flex flex-column mt-4">
                                 <label for="userTelph">Telephone</label>
                                 <input type="text" class="form-control" name="userTelph" id="userTelph" placeholder="+34 155 155 155" required>
                                 <div class="invalid-feedback">
@@ -38,8 +29,9 @@
                                     Looks good!
                                 </div>
                             </div>
-                            <div class="d-flex flex-row justify-content-center align-items-center">
-                                <button type="submit" class="btn btn-lg mt-2 btn-primary" data-bs-dismiss="modal">Submit</button>
+                            <div class="d-flex flex-row justify-content-around align-items-center my-5">
+                                <button type="submit" id="submit" name="submit"  class="btn btn-lg mt-2 btn-primary" data-bs-dismiss="modal">Change Account</button>
+                                <a href="index.php/profile/delete"><button type="button" class="btn btn-lg mt-2 btn-danger">Delete Account</button></a>
                             </div>
                         </form>
                     </div>
@@ -99,7 +91,9 @@
             </div>
         </div>
     </div>
-    <div>
+    <div id="objectMap">
 
     </div>
+
 </div>
+<script src="view/front/front-scripts/edit-profile-check.js"></script>

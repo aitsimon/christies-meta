@@ -112,14 +112,19 @@ class FrontController
             }
         }
         if ($check) {
-            DBManagerUsers::insertUser($_POST['userEmail'], $newPassword, $newRol, $newTelph);
-            $this->showHome();
-            $_SESSION['front-login'] = true;
-            $_SESSION['front-userId'] = DBManagerUsers::getMaxId() + 1;
+            $check2 = DBManagerUsers::insertUser($_POST['userEmail'], $newPassword, $newRol, $newTelph);
+            if($check2){
+                $_SESSION['front-login'] = true;
+                $newUser = DBManagerUsers::getUserByEmail($_POST['userEmail']);
+                $_SESSION['front-userId'] = $newUser->getUserId();
+                header('Location: ../home');
+            }
         } else {
             $_SESSION['error-message-front'] = $errorMsg;
-            $this->showSignup();
+            header('Location: ../signup');
+
         }
+
     }
 
     public function logout()
@@ -190,7 +195,42 @@ class FrontController
         $info['user'] = DBManagerUsers::getUserById($_SESSION['front-userId']);
         $this->load_view('view/front/profile.php', 'view/front/template-front.php', $info);
     }
+    public function editProfile(){
+        require('model/session-control-front.php');
+        $newTelph  = $_POST['userTelph'];
+        $_SESSION['error-message'] = '';
+        $errorMsg = '';
+        $check = true;
 
+        if ($newTelph === '') {
+            $errorMsg .= 'Telephone field is empty';
+            $check = false;
+        } else {
+            $regex = '/^\+((?:9[679]|8[035789]|6[789]|5[90]|42|3[578]|2[1-689])|9[0-58]|8[1246]|6[0-6]|5[1-8]|4[013-9]|3[0-469]|2[70]|7|1)(?:\W*\d){0,13}\d$/';
+            if (!preg_match($regex, $newTelph)) {
+                $errorMsg .= 'Telephone field invalid. Check again';
+                $check = false;
+            }
+        }
+        if ($check) {
+            DBManagerUsers::updateUserTelph($newTelph, (int)$_POST['userId']);
+        } else {
+            $_SESSION['error-message'] = $errorMsg;
+        }
+        header('Location: ../profile');
+    }
+    public function deleteUser(){
+        
+        $check = DBManagerUsers::deleteUser((int)$_SESSION['front-userId']);
+        if ($check) {
+           session_destroy();
+            header('Location: ../home');
+        } else {
+            $_SESSION['error-message'] = 'User could not be deleted';
+            header('Location: ../profile');
+        }
+
+    }
     public function showContact()
     {
         $info['title'] = 'Contact Form';

@@ -1,3 +1,9 @@
+<?php
+if(isset($_SESSION['front-userId'])){
+    echo $_SESSION['front-userId'];
+    var_dump(DBManagerUsers::getUserById($_SESSION['front-userId']));
+}
+?>
 <link rel="stylesheet" href="view/front/styles/nav.css">
 <div class="headerr">
     <header class="p-3 mb-3 border-bottom d-none d-lg-block">

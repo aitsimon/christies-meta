@@ -118,6 +118,23 @@ class DBManagerUsers
             return $check;
         }
     }
+    public static function updateUserTelph( $telph, $user_id)
+    {
+        $dbm = Connection::access();
+        try {
+            $check = false;
+            $clause = "UPDATE user SET telph = ?  WHERE user_id = ?";
+            $stmt = $dbm->prepare($clause);
+            if ($stmt->execute([$telph, $user_id])) {
+                $check = true;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return $check;
+        }
+    }
     public static function updateUserTokens($tokens, $user_id)
     {
         $dbm = Connection::access();
@@ -140,13 +157,14 @@ class DBManagerUsers
      * @param $user_id int Id of the user to be deleted
      * @return bool true if the user is deleted, false otherwise
      */
-    public static function deleteUser(int $user_id)
+    public static function deleteUser($user_id)
     {
         $dbm = Connection::access();
         try {
             $check = false;
-            $clause = "DELETE FROM user WHERE user_id =?";
+            $clause = "DELETE FROM user WHERE user_id = ?";
             $stmt = $dbm->prepare($clause);
+            $stmt->execute([$user_id]);
             if ($stmt->execute([$user_id])) {
                 $check = true;
             }

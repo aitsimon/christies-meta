@@ -83,7 +83,15 @@ if (isset($array_path[0]) && $array_path[0] === 'admin' && $array_path[1] === 'l
      }else if(isset($array_path[0]) && $array_path[0]==='navsearch'){
         $front_controller->logout();
     }else if(isset($array_path[0]) && $array_path[0]==='profile'){
-        $front_controller->showProfile();
+        if(!isset($array_path[1])){
+            $front_controller->showProfile();
+        }else{
+            if($array_path[1] === 'edit'){
+                $front_controller->editProfile();
+            }else if($array_path[1] === 'delete'){
+                $front_controller->deleteUser();
+            }
+        }
     }else if(isset($array_path[0]) && $array_path[0]==='logout'){
         $front_controller->logout();
      }

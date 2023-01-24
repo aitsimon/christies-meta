@@ -24,7 +24,7 @@ function comprobar(evt) {
     var smallError = elemento.nextElementSibling;
     switch (name) {
         case 'userEmail':
-            let regexx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            let regexx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,8}))$/;
             let emailEntered = elemento.value;
             if(regexx.test(emailEntered)) {
                 smallError.innerHTML="";
@@ -33,7 +33,7 @@ function comprobar(evt) {
             }
             break;
         case 'userPassword':
-            let patron = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+            let patron = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,30}$/;
             let passwordEntered = elemento.value;
             if(patron.test(passwordEntered)) {
                 smallError.innerHTML='';
