@@ -11,70 +11,112 @@ function previewFile(input,n){
         reader.readAsDataURL(file);
     }
 }
-var todosI =document.getElementsByTagName('input');
-var todosTextArea = document.getElementsByTagName('textarea');
-var botones = document.getElementsByClassName('bt-fo');
-var bEnviar = botones[0];
+let latitudeInput = document.getElementById('objectLatitude');
+let longitudeInput = document.getElementById('objectLongitude');
+if(latitudeInput.value!==''){
+   longitudeInput.classList.add('vfI')
+}
+if(longitudeInput.value!==''){
+    latitudeInput.classList.add('vfI');
+}
+var inputs =document.getElementsByClassName('vfI');
+var buttons = document.getElementsByClassName('bt-fo');
+var sendBtn = buttons[0];
+window.onload = function(){
+    for (let i = 0; i <inputs.length; i++) {
+        checkInd(inputs[i]);
+    }
 
-for (let i = 0; i < 2; i++) {
-    todosI[i].addEventListener('blur;',comprobar);
-    todosI[i].addEventListener('loadstart;',comprobar);
+    checkAll();
 }
-for (let i = 0; i < todosI.length; i++) {
-    todosI[i].setAttribute('onblur', 'comprobar(event,this), comprobarTodos()');
-    todosI[i].setAttribute('onload', 'comprobar(event,this), comprobarTodos()');
+for (let i = 0; i < inputs.length; i++) {
+    let input = inputs[i];
+    input.setAttribute('oninput','checkInd(this)');
 }
-for (let i = 0; i < todosTextArea.length; i++) {
-    todosTextArea[i].setAttribute('required', '');
-    todosTextArea[i].setAttribute('onblur', 'comprobar(event,this), comprobarTodos()');
-
+function checkAll(){
+    let check = false;
+    for (let i = 0; i < inputs.length; i++) {
+        let input = inputs[i];
+        if (input.classList.contains('is-valid')) {
+            check = true;
+        } else{
+            check = false;
+        }
+    }
+    sendBtn.disabled = !check;
 }
-function dateIsValid(date) {
-    return date instanceof Date && !isNaN(date);
-}
-function comprobar(evt) {
-    var elemento = evt.currentTarget;
-    var name = elemento.name;
-    var smallError = elemento.nextElementSibling;
-    switch (name) {
+function checkInd(elm){
+    let element = elm;
+    let inputName = element.name;
+    let value = element.value;
+    switch (inputName) {
         case 'objectName':
-            let patron = /^[a-záéíóúüñç\-\_\s]{3,20}$/i;
-            let nameEntered = elemento.value;
-            if(patron.test(nameEntered)) {
-                smallError.innerHTML='';
+            let regexx = /^[a-z\s\-]{3,20}$/gmi;
+            if(regexx.test(value)) {
+                if(element.classList.contains('is-invalid')){
+                    element.classList.remove('is-invalid');
+                }
+                element.classList.add('is-valid');
             }else{
-                smallError.innerHTML='Name field invalid. No numbers or special characters allowed. Min length: 2. Max length: 20.';
+                if(element.classList.contains('is-valid')){
+                    element.classList.remove('is-valid');
+                }
+                if(!element.classList.contains('is-invalid')){
+                    element.classList.add('is-invalid');
+                }
             }
             break;
         case 'objectPrice':
-            if (typeof (eval(elemento.value))==='number') {
-                smallError.innerHTML = '';
-            } else {
-                smallError.innerHTML = 'Price must be a number.';
+            let regex = /^\d+\.?\d*$/;
+            if(regex.test(value)&&parseFloat(value)>0) {
+                if(element.classList.contains('is-invalid')){
+                    element.classList.remove('is-invalid');
+                }
+                element.classList.add('is-valid');
+            }else{
+                if(element.classList.contains('is-valid')){
+                    element.classList.remove('is-valid');
+                }
+                if(!element.classList.contains('is-invalid')){
+                    element.classList.add('is-invalid');
+                }
             }
             break;
-    }
-}
-function comprobarTodos() {
-    smalls = document.getElementsByClassName('text-muted');
-    let vacios = true;
-    for (let i = 0; i < smalls.length; i++) {
-        const element = smalls[i];
-        if (element.innerText.length > 0) {
-            vacios = false;
+        case 'objectLongitude':
+            let regex2 = /^\d+\.?\d*$/;
+            if(regex2.test(value)&&parseFloat(value)>-90&&parseFloat(value)<90) {
+                if(element.classList.contains('is-invalid')){
+                    element.classList.remove('is-invalid');
+                }
+                element.classList.add('is-valid');
+            }else{
+                if(element.classList.contains('is-valid')){
+                    element.classList.remove('is-valid');
+                }
+                if(!element.classList.contains('is-invalid')){
+                    element.classList.add('is-invalid');
+                }
+            }
             break;
-        }
+        case 'objectLongitude':
+            let regex3 = /^\d+\.?\d*$/;
+            if(regex3.test(value)&&parseFloat(value)>-180&&parseFloat(value)<180) {
+                if(element.classList.contains('is-invalid')){
+                    element.classList.remove('is-invalid');
+                }
+                element.classList.add('is-valid');
+            }else{
+                if(element.classList.contains('is-valid')){
+                    element.classList.remove('is-valid');
+                }
+                if(!element.classList.contains('is-invalid')){
+                    element.classList.add('is-invalid');
+                }
+            }
+            break;
+        default:
+            element.classList.add('is-valid');
+            break;
     }
-    if (vacios) {
-        bEnviar.disabled = false;
-        bEnviar.classList.add('btn-primary');
-
-        bEnviar.removeAttribute('aria-disabled','true');
-    } else {
-        bEnviar.classList.remove('btn-primary');
-
-        bEnviar.removeAttribute('aria-disabled','false');
-
-        bEnviar.disabled = true;
-    }
+    checkAll();
 }

@@ -10,7 +10,8 @@ class DBManagerCategories
         $dbm = Connection::access();
         try {
             $clause = "SELECT * FROM categories";
-            $results = $dbm->query($clause);
+            $stmt = $dbm->query($clause);
+            $results = $stmt->fetchAll();
             $categories = array();
             foreach ($results as $result) {
                 $category = new Category($result['cat_id'], $result['name'], $result['description'], $result['img'],$result['upper_cat_id']);
@@ -167,6 +168,65 @@ class DBManagerCategories
         } finally {
             $dbm = null;
             return $categories;
+        }
+    }
+    public static function getCatsNameLike($nameEntered){
+        $dbm = Connection::access();
+        try {
+            $clause = "SELECT * FROM categories where name LIKE concat ('%', ?, '%')";
+            $stmt = $dbm->prepare($clause);
+            $stmt->execute([$nameEntered]);
+            $results = $stmt->fetchAll();
+            $categories = [];
+            foreach ($results as $result){
+                $category = new Category($result['cat_id'], $result['name'], $result['description'], $result['img'],$result['upper_cat_id']);
+                $categories[] = $category;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return $categories;
+        }
+    }
+    public static function getCatsDescriptionLike($description){
+        $dbm = Connection::access();
+        try {
+            $clause = "SELECT * FROM categories where categories.description LIKE concat ('%', ?, '%')";
+            $stmt = $dbm->prepare($clause);
+            $stmt->execute([$description]);
+            $results = $stmt->fetchAll();
+            $categories = [];
+            foreach ($results as $result){
+                $category = new Category($result['cat_id'], $result['name'], $result['description'], $result['img'],$result['upper_cat_id']);
+                $categories[] = $category;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return $categories;
+        }
+    }
+    public static function getTop10CategoriesOverAllPopularity($order){
+        $dbm = Connection::access();
+        try {
+            $clause = "SELECT categories.cat_id, object.object_id as obj, ifnull(count(purchases.purch_id),0) + (SELECT ifnull(count(object_id),0) from score where object_id=obj) as 'score' from purchases join object on purchases.object_id=object.object_id join categories on object.cat_id=categories.cat_id where purchases.object_id=object.object_id
+                GROUP BY categories.cat_id 
+                ORDER BY `score` $order limit 10";
+            $stmt = $dbm->prepare($clause);
+            $stmt->execute([]);
+            $results = $stmt->fetchAll();
+            $categoriesIds = [];
+            foreach ($results as $result){
+                $category = [$result['cat_id']];
+                $categoriesIds[] = $category;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return $categoriesIds;
         }
     }
 }

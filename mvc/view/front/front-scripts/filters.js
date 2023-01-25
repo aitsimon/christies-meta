@@ -5,7 +5,6 @@ let btnPurchases = document.getElementById('filterPurchasesBtn');
 let searchInput = document.getElementById('searchFilter');
 function insertItems (datas){
     for (const object of datas) {
-        console.log(object);
         let  divAccordeonItem = document.createElement('div');
         divAccordeonItem.classList.add('accordion-item');
 
@@ -127,9 +126,9 @@ selectCategory.addEventListener('change', () => {
    });
 });
 btnComments.addEventListener('click',() =>{
+    selectCategory.selectedIndex =  0;
     let order = undefined;
     let icon = event.target;
-    console.log(icon);
     if(icon.classList.contains('fa-arrow-alt-circle-down')){
         order='desc';
     }else{
@@ -146,7 +145,6 @@ btnComments.addEventListener('click',() =>{
         }
     }).done((response) => {
         divAccordeon.innerHTML = "";
-        console.log(response)
         insertItems(response);
         if(order==='desc'){
             icon.classList.remove('fa-arrow-alt-circle-down');
@@ -159,9 +157,9 @@ btnComments.addEventListener('click',() =>{
     });
 })
 btnPurchases.addEventListener('click',() =>{
+    selectCategory.selectedIndex =  0;
     let order = undefined;
     let icon = event.target;
-    console.log(icon);
     if(icon.classList.contains('fa-arrow-alt-circle-down')){
         order='desc';
     }else{
@@ -178,7 +176,6 @@ btnPurchases.addEventListener('click',() =>{
         }
     }).done((response) => {
         divAccordeon.innerHTML = "";
-        console.log(response)
         insertItems(response);
         if(order==='desc'){
             icon.classList.remove('fa-arrow-alt-circle-down');
@@ -189,4 +186,20 @@ btnPurchases.addEventListener('click',() =>{
         }
         reinitFlickityLib();
     });
+});
+searchInput.addEventListener('keyup', ()=>{
+    selectCategory.selectedIndex =  0;
+    $.ajax({
+        url: 'http://localhost/christies-meta/mvc/view/front/jsonExchanger.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            'action': 'searchProducts',
+            'text':  searchInput.value,
+        }
+    }).done((response) => {
+        divAccordeon.innerHTML = '';
+        insertItems(response);
+        reinitFlickityLib();
+    })
 })

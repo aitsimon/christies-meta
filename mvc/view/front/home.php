@@ -7,32 +7,29 @@
     <!-- Flickity HTML init -->
     <div class="carousel js-flickity">
         <!-- images from unsplash.com -->
-        <div class="carousel-cell">
-            <img src="https://user-images.githubusercontent.com/43302778/106805462-7a908400-6645-11eb-958f-cd72b74a17b3.jpg" alt="orange tree" />
-        </div>
-        <div class="carousel-cell">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/submerged.jpg" alt="submerged" />
-        </div>
-        <div class="carousel-cell">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/look-out.jpg" alt="look-out" />
-        </div>
-        <div class="carousel-cell">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/one-world-trade.jpg" alt="One World Trade" />
-        </div>
-        <div class="carousel-cell">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/drizzle.jpg" alt="drizzle" />
-        </div>
-        <div class="carousel-cell">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/cat-nose.jpg" alt="cat nose" />
-        </div>
-        <div class="carousel-cell">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/contrail.jpg" alt="contrail" />
-        </div>
-        <div class="carousel-cell">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/golden-hour.jpg" alt="golden hour" />
-        </div>
-        <div class="carousel-cell">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/flight-formation.jpg" alt="flight formation" />
-        </div>
+        <?php
+        if(!isset($_SESSION['front-userId'])){
+            $objectsIds = DBManagerObject::getTop10ObjectsByOverallPopularity('desc');
+            $objects = array();
+            foreach($objectsIds as $id){
+                $objects[] = DBManagerObject::getObjectById($id[0]);
+            }
+        }else{
+            if(count(DBManagerObject::getLast10ObjectsCommentedByUser($_SESSION['front-userId']))>0) {
+                $objects = DBManagerObject::getLast10ObjectsCommentedByUser($_SESSION['front-userId']);
+            }else{
+                $objectsIds = DBManagerObject::getTop10ObjectsByOverallPopularity('desc');
+                $objects = array();
+                foreach($objectsIds as $id){
+                    $objects[] = DBManagerObject::getObjectById($id[0]);
+                }
+            }
+        }
+        foreach ($objects as $object){
+            echo '<div class="carousel-cell">';
+            echo '<a class="text-decoration-none text-center text-white h4 mb-0" href="./index.php/list/'.$object->getObjectId().'"><img src="'.$object->getImg1().'" alt="'.$object->getName().'">'.$object->getName().'</a>';
+            echo '</div>';
+        }
+        ?>
     </div>
 </div>

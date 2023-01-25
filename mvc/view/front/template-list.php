@@ -82,7 +82,9 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
         </div>
         <div id="results">
             <div class="accordion col-12" id="accordionObjects">
-
+                <?php
+                    require_once 'view/front/list.php';
+                ?>
             </div>
             <script src="view/front/front-scripts/filters.js"></script>
             <script src="view/front/front-scripts/generateItemsFromSession.js"></script>

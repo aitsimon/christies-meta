@@ -92,8 +92,12 @@
         </div>
     </div>
     <div id="objectMap">
+        <h2>Map of Objects</h2>
+        <div id="map"  style=" height: 400px;">
 
+        </div>
     </div>
 
 </div>
 <script src="view/front/front-scripts/edit-profile-check.js"></script>
+<script src="view/front/front-scripts/profileMapObjects.js"></script>

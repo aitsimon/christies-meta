@@ -206,6 +206,29 @@ class DBManagerObject
             return $objects;
         }
     }
+    public static function getLast10ObjectsCommentedByUser($user_id)
+    {
+        $dbm = Connection::access();
+        try {
+            $clause = "SELECT * from object JOIN comments c on object.object_id = c.object_id JOIN user u on u.user_id = c.user_id where u.user_id = ? order by c.date desc limit 10";
+            $stmt = $dbm->prepare($clause);
+            $stmt->execute([(int)$user_id]);
+            $results = $stmt->fetchAll();
+            $objects = false;
+            if ($stmt->execute([$user_id])) {
+                $objects = array();
+                foreach ($results as $result) {
+                    $object = new Virtual_Object($result['object_id'], $result['name'], $result['lat'], $result['lon'], $result['price'], $result['img1'], $result['img2'], $result['img3'], $result['cat_id']);
+                    $objects[]=$object;
+                }
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return $objects;
+        }
+    }
     public static function getAllObjectsFromCategory($cat_id)
     {
         $dbm = Connection::access();
@@ -265,6 +288,53 @@ class DBManagerObject
                 $objects = array();
                 foreach ($results as $result) {
                     $object = new Virtual_Object($result['object_id'], $result['name'], $result['lat'], $result['lon'], $result['price'], $result['img1'], $result['img2'], $result['img3'], $result['cat_id']);
+                    $objects[]=$object;
+                }
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return $objects;
+        }
+    }
+    public static function getObjectsByPurchasesTop10()
+    {
+        $dbm = Connection::access();
+        try {
+            $clause = "SELECT * from object join purchases p on object.object_id = p.object_id order by count(object.object_id) desc limit 10";
+            $stmt = $dbm->prepare($clause);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            $objects = false;
+            if ($stmt->execute()) {
+                $objects = array();
+                foreach ($results as $result) {
+                    $object = new Virtual_Object($result['object_id'], $result['name'], $result['lat'], $result['lon'], $result['price'], $result['img1'], $result['img2'], $result['img3'], $result['cat_id']);
+                    $objects[]=$object;
+                }
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return $objects;
+        }
+    }
+    public static function getTop10ObjectsByOverallPopularity($order){
+        $dbm = Connection::access();
+        try {
+            $clause = "SELECT object.object_id as obj, ifnull(count(purchases.purch_id),0) + (SELECT ifnull(count(object_id),0) from score where object_id=obj) as 'score' from purchases join object on purchases.object_id=object.object_id join categories on object.cat_id=categories.cat_id where purchases.object_id=object.object_id
+                        GROUP BY purchases.object_id 
+                        ORDER BY `score` $order limit 10";
+            $stmt = $dbm->prepare($clause);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            $objects = false;
+            if ($stmt->execute()) {
+                $objects = array();
+                foreach ($results as $result) {
+                    $object =[$result['obj']];
                     $objects[]=$object;
                 }
             }

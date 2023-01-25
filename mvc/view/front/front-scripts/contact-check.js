@@ -14,11 +14,14 @@ function checkAll(){
         let input = inputs[i];
         if (input.classList.contains('is-valid')) {
             check = true;
-        } else if (!input.classList.contains('is-valid') && !input.classList.contains('is-invalid')) {
-            check = false
-        } else {
+        } else{
             check = false;
         }
+    }
+    if(commentTextArea.classList.contains('is-valid')){
+        check = true;
+    }else{
+        check = false;
     }
         sendBtn.disabled = !check;
 }

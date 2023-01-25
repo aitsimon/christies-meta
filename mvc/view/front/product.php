@@ -83,12 +83,17 @@
             <h2 class="me-2">Comments</h2>
             <button class="btn btn-primary" <?php
             $check = true;
-            foreach ($info['commentsOfObject'] as $comment){
-                if(!isset($_SESSION['front-login'])||$comment->getUserId()==$_SESSION['front-userId']){
-                    $check = false;
-                    break;
+            if(!isset($_SESSION['front-login'])){
+                $check = false;
+            }else{
+                foreach ($info['commentsOfObject'] as $comment){
+                    if($comment->getUserId()==$_SESSION['front-userId']){
+                        $check = false;
+                        break;
+                    }
                 }
             }
+
             if(!$check){
                 echo 'disabled';
             }

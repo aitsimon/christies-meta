@@ -77,6 +77,7 @@ class Controller
         require ('model/session-control.php');
         $info2 = array();
         $info2['title']='Contact Form';
+        $_SESSION['table-used']='contact_forms';
         $this->load_view('view/contact-forms.php','view/template.php',$info2);
     }
     public function show404Page(){

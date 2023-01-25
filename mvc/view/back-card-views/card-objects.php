@@ -26,28 +26,50 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
             <input type="hidden" id="objectId" name="objectId" value="<?php echo $info['object']->getObjectId()?>">
             <div class="form-group">
                 <label for="objectName">Name*</label>
-                <input type="text" class="form-control" id="objectName" aria-describedby="emailHelp"
+                <input type="text" maxlength="20" class="form-control vfI" id="objectName" aria-describedby="emailHelp"
                        placeholder="object name" required name="objectName" value="<?php echo $info['object']->getName()?>">
-                <small id="nameHelp" class="form-text text-muted">Name of the object</small>
-
+                <div class="invalid-feedback">
+                    Please provide a valid name. No special characters are allowed
+                </div>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
             </div>
             <div class="form-group">
                 <label for="objectLatitude">Latitude</label>
                 <input type="number" step="any" class="form-control" id="objectLatitude" aria-describedby="latitudeHelp"
                        placeholder="-82.14" min="-90" max="90" name="objectLatitude" value="<?php if($info['object']->getLat()!=NULL) echo $info['object']->getLat()?>">
                 <small id="latitudeHelp" class="form-text">Latitude of the object, optional.</small>
+                <div class="invalid-feedback">
+                    Please provide a valid latitude. Number between than -90 and 90.
+                </div>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
             </div>
             <div class="form-group">
                 <label for="objectLongitude">Longitude</label>
                 <input type="number" step="any" class="form-control" id="objectLongitude" aria-describedby="longitudeHelp"
                        placeholder="60" min="-180" max="180"  name="objectLongitude" value="<?php if($info['object']->getLon()!=NULL) echo $info['object']->getLon()?>">
                 <small id="longitudeHelp" class="form-text">Longitude of the object, optional.</small>
+                <div class="invalid-feedback">
+                    Please provide a valid longitude. Number between than -180 and 180.
+                </div>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
             </div>
             <div class="form-group">
                 <label for="objectPrice">Price*</label>
-                <input type="number" step="any" class="form-control" id="objectPrice" aria-describedby="priceHelp"
+                <input type="number" step="any" class="form-control vfI" id="objectPrice" aria-describedby="priceHelp"
                        placeholder="60" required name="objectPrice" value="<?php echo $info['object']->getPrice()?>">
                 <small id="priceHelp" class="form-text text-muted">Price of the object.</small>
+                <div class="invalid-feedback">
+                    Please provide a valid price. Number greater than 0.
+                </div>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
             </div>
             <div class="form-group">
                 <label for="object-cat">Category*</label>
@@ -63,9 +85,9 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
             </div>
             <div class="form-group">
                 <label for="objectImg1">Principal Image*</label>
-                <input type="file"  name="objectImg1" onchange="previewFile(this,0)" accept="image/*" aria-describedby="imgHelp" class="form-control" id="objectImg1" value="<?php echo $info['object']->getImg1()?>">
+                <input type="file" value="<?php echo $info['object']->getImg1()?>"  name="objectImg1" onchange="previewFile(this,0)" accept="image/*" aria-describedby="imgHelp" class="form-control" id="objectImg1" ">
                 <div class="card container col-4">
-                    <img src="<?php echo $info['object']->getImg1() ?>" alt="Image of the product" id="previewImg0" class="prev-img img-fluid">
+                    <img src="<?php echo $info['object']->getImg1()?>" alt="Image of the product" id="previewImg0" class="prev-img img-fluid">
                 </div>
             </div>
             <div class="form-group">

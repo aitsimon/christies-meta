@@ -1,5 +1,5 @@
 <?php
-
+include_once 'Connection.php';
 class DBAdmin
 {
     public static function login($email, $password)

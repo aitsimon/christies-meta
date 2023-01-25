@@ -42,6 +42,16 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <!-- JavaScript Flicikty-->
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <!-- CSS LeafletMaps-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+          integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+          crossorigin=""/>
+    <!-- JS LeafletMaps-->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+            integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+            crossorigin=""></script>
+    <!-- Google Captcha-->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body class="wrapper">
     <?php
@@ -58,23 +68,5 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
         ?>
     </div>
     <script src="view/admin/plugins/jquery-ui/jquery-ui.min.js"></script>
-    <!-- ChartJS -->
-    <script src="view/admin/plugins/chart.js/Chart.min.js"></script>
-    <!-- Sparkline -->
-    <script src="view/admin/plugins/sparklines/sparkline.js"></script>
-    <!-- JQVMap -->
-    <script src="view/admin/plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="view/admin/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="view/admin/plugins/jquery-knob/jquery.knob.min.js"></script>
-    <!-- daterangepicker -->
-    <script src="view/admin/plugins/moment/moment.min.js"></script>
-    <script src="view/admin/plugins/daterangepicker/daterangepicker.js"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="view/admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <!-- Summernote -->
-    <script src="view/admin/plugins/summernote/summernote-bs4.min.js"></script>
-    <!-- overlayScrollbars -->
-    <script src="view/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 </body>
 </html>

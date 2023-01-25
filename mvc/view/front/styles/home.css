@@ -52,7 +52,7 @@
 
 @media screen and ( min-width: 960px ) {
     .carousel-cell {
-        width: 60%;
+        width: 50%;
     }
 }
 

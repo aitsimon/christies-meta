@@ -12,6 +12,7 @@ require("./model/Comment.php");
 require("./model/Purchase.php");
 require("./model/User.php");
 require("./model/Virtual_Object.php");
+require("./model/ContactForm.php");
 require("./model/DBAdmin.php");
 require ('./model/DBManagerUsers.php');
 require ('./model/DBManagerCategories.php');
@@ -19,6 +20,7 @@ require ('./model/DBManagerComments.php');
 require ('./model/DBManagerObject.php');
 require ('./model/DBManagerPurchases.php');
 require ('./model/DBMScore.php');
+require ('./model/DBMContactForms.php');
 require ('./model/Mailer2.php');
 
 //Instancio el controlador
@@ -92,6 +94,8 @@ if (isset($array_path[0]) && $array_path[0] === 'admin' && $array_path[1] === 'l
                 $front_controller->deleteUser();
             }
         }
+    }else if(isset($array_path[0]) && $array_path[0]==='categories'){
+        $front_controller->showCategories();
     }else if(isset($array_path[0]) && $array_path[0]==='logout'){
         $front_controller->logout();
      }

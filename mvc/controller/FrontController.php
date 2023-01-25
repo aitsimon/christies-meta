@@ -134,6 +134,12 @@ class FrontController
         header("Location: home");
 
     }
+    public function showCategories(){
+        $info['title'] = 'Categories';
+        $categories = DBManagerCategories::getAll();
+        $info['categories'] = $categories;
+        $this->load_view('view/front/categories.php','view/front/template-front.php',$info);
+    }
 
     public function showHome()
     {
@@ -146,11 +152,6 @@ class FrontController
         $objects = DBManagerObject::getObjectsByName($_POST['search']);
         $_SESSION['objects-to-show'] = $objects;
         $this->showList();
-    }
-
-    public function showListDefault()
-    {
-
     }
 
     public function showList()
@@ -245,6 +246,8 @@ class FrontController
         $userEmail = $_POST['userEmail'];
         $userName = $_POST['userName'];
         $commentContent = $_POST['userComment'];
+        $captcha = $_POST['g-recaptcha-response'];
+        $captchaSecretKey = "6LfhaigkAAAAAE681ZdIVhOqKdCZz8oEyNnOuhly";
 
         if ($userEmail === '') {
             $errorMsg .= 'Email field is empty';
@@ -260,17 +263,28 @@ class FrontController
             $errorMsg .= 'Comment field is empty';
             $check = false;
         } else {
-            $regex = '/^[\s\w]{10,}$/';
+            $regex = '/^[\s\w]{10,400}$/';
             if (!preg_match($regex, $commentContent)) {
-                $errorMsg .= '';
+                $errorMsg .= 'Message length error. Length must be between 10 and 400 characters';
                 $check = false;
             }
         }
+        $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$captchaSecretKey&response=$captcha");
+        $decodedResponse = json_decode($response, true);
+        if (!$decodedResponse['success']){
+            $check =false;
+            $errorMsg = 'Captcha not valid.';
+        }
+
         if ($check) {
             $mailer = new Mailer2('comercioaitor@gmail.com','comercioaitor@gmail.com','Contact Form from:'.$_POST['userEmail'],$_POST['userComment']);
             $mailer->mandarMail();
+            DBMContactForms::insertContact($userName,$userEmail,$commentContent);
+            header('Location: ../home');
+        }else{
+            $_SESSION['error-message'] = $errorMsg;
+            header("Location: ../contact");
         }
-        header('Location: ../home');
     }
     public function buyCompleted(){
         require('model/session-control-front.php');
@@ -294,7 +308,7 @@ class FrontController
               $newTokens = $prevTokens-($object->getPrice());
               DBManagerUsers::updateUserTokens($newTokens,$user->getUserId());
               $_SESSION['bought-object'] = $object->getObjectId();
-              $mailer = new Mailer2('comercioaitor@gmail.com','comercioaitor@gmail.com','Purchase Christies & Meta:'.(DBManagerUsers::getUserById($_SESSION['front-userId']))->getEmail(),'You have successfully purchased an item at Christies & Meta: '.$object->getName());
+              $mailer = new Mailer2('comercioaitor@gmail.com',$user->getEmail(),'Purchase Christies & Meta:'.(DBManagerUsers::getUserById($_SESSION['front-userId']))->getEmail(),'You have successfully purchased an item at Christies & Meta: '.$object->getName(). '\n for'.$object->getPrice().' tokens value.');
               $mailer->mandarMail();
               header("Location: ./completed");
             }

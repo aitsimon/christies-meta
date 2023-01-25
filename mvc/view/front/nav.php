@@ -1,6 +1,5 @@
 <?php
 if(isset($_SESSION['front-userId'])){
-    echo $_SESSION['front-userId'];
     var_dump(DBManagerUsers::getUserById($_SESSION['front-userId']));
 }
 ?>
@@ -16,10 +15,11 @@ if(isset($_SESSION['front-userId'])){
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li><a href="./index.php/home" class="nav-link px-2 link-dark">Home</a></li>
             <li><a href="./index.php/list" class="nav-link px-2 link-dark">List</a></li>
-            <li><a href="./index.php/contact" class="nav-link px-2 link-dark">Contact</a></li>
+              <li><a href="./index.php/categories" class="nav-link px-2 link-dark">Categories</a></li>
+              <li><a href="./index.php/contact" class="nav-link px-2 link-dark">Contact</a></li>
           </ul>
 
-          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" id="navSearchForm" method="post" action="./index.php/navsearch">
+          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 navbarName" role="search" id="navSearchForm" method="post" action="./index.php/navsearch">
             <input type="search" name="search" id="search" class="form-control searchInputNav" placeholder="Search by name..." aria-label="Search">
           </form>
             <?php
@@ -60,8 +60,8 @@ if(isset($_SESSION['front-userId'])){
         </div>
 
         <div class="d-flex align-items-center justify-content-end">
-          <form class="w-25 me-3 d-none d-sm-block" role="search">
-            <input type="search" class="form-control searchInputNav" id="navSearchForm" placeholder="Search by name..." aria-label="Search">
+          <form class="w-25 me-3 d-none d-sm-block navbarName" method="post" role="search" action="./index.php/navsearch">
+            <input type="search" class="form-control searchInputNav" id="search" placeholder="Search by name..." aria-label="Search">
           </form>
 
             <?php

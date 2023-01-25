@@ -57,7 +57,7 @@ class ObjectController
                 $errorMsg.= 'Name field is empty';
                 $check = false;
             }else{
-                $regex = '/^[a-záéíóúüñç_-]{2,20}$/i';
+                $regex = '/^[a-z\s\-]{2,20}$/mi';
                 if(!preg_match($regex,$objectName)){
                     $errorMsg.= 'Name field invalid. No numbers or special characters allowed. Min length: 2. Max length: 20. ';
                     $check = false;
@@ -149,7 +149,7 @@ class ObjectController
                 $errorMsg.= 'Name field is empty';
                 $check = false;
             }else{
-                $regex = '/^[a-záéíóúüñç_-]{2,20}$/i';
+                $regex = '/^[a-z\s\-]{2,20}$/i';
                 if(!preg_match($regex,$objectName)){
                     $errorMsg.= 'Name field invalid. No numbers or special characters allowed. Min length: 2. Max length: 20. ';
                     $check = false;
@@ -171,7 +171,7 @@ class ObjectController
             $extension = pathinfo( $_FILES["objectImg1"]["name"], PATHINFO_EXTENSION );
             $newName = $fileName . "." . $extension;
             $path = $_SERVER['DOCUMENT_ROOT']."/christies-meta/mvc/view/categories-images/".$_POST['object-cat']."/{$newName}";
-            if(move_uploaded_file($temporal, $path)){
+            if(move_uploaded_file($temporal, $path) || file_exists($path)){
                 $objectImg1="http://localhost/christies-meta/mvc/view/categories-images/".$_POST['object-cat']."/{$newName}";
             }else{
                 $check = false;
@@ -182,11 +182,10 @@ class ObjectController
                 $extension2 = pathinfo( $_FILES["objectImg2"]["name"], PATHINFO_EXTENSION );
                 $newName2 = $fileName2 . "." . $extension2;
                 $path2 = $_SERVER['DOCUMENT_ROOT']."/christies-meta/mvc/view/categories-images/".$_POST['object-cat']."/{$newName2}";
-                if(move_uploaded_file($temporal2, $path2)){
+                if(move_uploaded_file($temporal2, $path2)|| file_exists($path2)){
                     $objectImg2="http://localhost/christies-meta/mvc/view/categories-images/".$_POST['object-cat']."/{$newName2}";
                 }else{
                     $objectImg2 = NULL;
-
                 }
             }
             if(isset($objectImg3)){
@@ -195,18 +194,20 @@ class ObjectController
                 $extension3 = pathinfo( $_FILES["objectImg3"]["name"], PATHINFO_EXTENSION );
                 $newName3 = $fileName3 . "." . $extension3;
                 $path3 = $_SERVER['DOCUMENT_ROOT']."/christies-meta/mvc/view/categories-images/".$_POST['object-cat']."/{$newName3}";
-                if(move_uploaded_file($temporal3, $path3)){
+                if(move_uploaded_file($temporal3, $path3)|| file_exists($path3)){
                     $objectImg3="http://localhost/christies-meta/mvc/view/categories-images/".$_POST['object-cat']."/{$newName3}";
                 }else{
                     $objectImg2=NULL;
                 }
             }
             if($check){
+
                 DBManagerObject::updateObject($objectId,$objectName,$objectLatitude,$objectLongitude,$objectPrice,$objectImg1,$objectImg2,$objectImg3,$objectCategory);
             }else{
+                echo 'jh';
                 $_SESSION['error-message'] = $errorMsg;
             }
-            $this->viewObject($objectId);
+            //header("Location: ../products/".$objectId);
         }
     }
 }

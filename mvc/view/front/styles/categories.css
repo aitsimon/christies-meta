@@ -1,0 +1,9 @@
+.card{
+    height: 100%;
+}
+.card h5{
+    color: #00D1B2 !important;
+}
+.card p{
+    text-align: justify;
+}

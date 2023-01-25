@@ -6,7 +6,7 @@ class Category
     public string $name;
     public string $description;
     public string $img;
-    public int $upper_cat_id;
+    public $upper_cat_id;
 
     /**
      * @param $cat_id
@@ -20,7 +20,7 @@ class Category
         $this->name = $name;
         $this->description = $description;
         $this->img = $img;
-        $this->upper_cat_id = $upper_cat_id;
+        $this->upper_cat_id = $upper_cat_id ?? null;
     }
 
     /**
@@ -31,18 +31,13 @@ class Category
         return $this->cat_id;
     }
 
-    /**
-     * @return int
-     */
-    public function getUpperCatId(): int
+
+    public function getUpperCatId()
     {
         return $this->upper_cat_id;
     }
 
-    /**
-     * @param int $upper_cat_id
-     */
-    public function setUpperCatId(int $upper_cat_id): void
+    public function setUpperCatId($upper_cat_id): void
     {
         $this->upper_cat_id = $upper_cat_id;
     }
