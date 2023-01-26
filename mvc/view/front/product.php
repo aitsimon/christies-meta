@@ -125,8 +125,21 @@
             </div>
         </div>
         <?php
+        function checkOddsEven($number){
+            if($number % 2 === 0){
+                return true;
+            }
+            else{
+               return false;
+            }
+        }
+        $i = 0;
         foreach ($info['commentsOfObject'] as $comment) {
-            echo '<div class=" review d-flex flex-row py-2 mb-2 px-1 justify-content-center align-items-center flex-wrap border border-dark rounded">';
+            $bgColor = 'bg-light';
+            if(checkOddsEven($i)){
+                $bgColor = 'bg-white';
+            }
+            echo '<div class=" review d-flex flex-row py-2 mb-2 px-1 justify-content-center align-items-center flex-wrap border border-light rounded shadow-sm '.$bgColor.'">';
                     echo '<div class="d-flex flex-row col-12 justify-content-center justify-content-md-start align-items-center">
                               <img class="" width="50" height="50" src="https://cdn.pixabay.com/photo/2021/06/07/13/45/user-6318003__340.png">
                               <span class="col-6 col-md-9">'.(DBManagerUsers::getUserById($comment->getUserId()))->getEmail().'</span>';
@@ -136,6 +149,7 @@
                         echo '<span class="col-12">'.$comment->getContent().'</span>';
                     echo '</div>';
             echo '</div>';
+            $i++;
         }
         ?>
     </div>
