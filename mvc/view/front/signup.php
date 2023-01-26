@@ -4,12 +4,12 @@
         <form class="row g-3" method="post" action="./index.php/signup/process">
             <div class="form-group">
                 <label for="userEmail" class="form-label">Email</label>
-                <input type="email" class="form-control w-50" id="userEmail" placeholder="user@mail.com" name="userEmail">
+                <input type="email"  maxlength="20" class="form-control w-50" id="userEmail" placeholder="user@mail.com" name="userEmail">
                 <small></small>
             </div>
             <div class="form-group">
                 <label for="userPassword" class="form-label ">Password</label>
-                <input type="password" class="form-control w-50" placeholder="*************" id="userPassword" name="userPassword">
+                <input type="password" maxlength="35" class="form-control w-50" placeholder="*************" id="userPassword" name="userPassword">
                 <small></small>
             </div>
             <div class="form-group">
@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 <label for="userTelph" class="form-label">Telephone Number</label>
-                <input type="text" class="form-control w-50"  placeholder="+34 678890890" id="userTelph" name="userTelph">
+                <input type="text" maxlength="30" class="form-control w-50"  placeholder="+34 678890890" id="userTelph" name="userTelph">
                 <small></small>
             </div>
             <div class="form-group">

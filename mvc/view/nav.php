@@ -15,7 +15,7 @@
     <a href="./dashboard" class="brand-link">
         <img src="../../view/media/logos/logof4-3.png" alt="AdminLTE Logo"
              class="brand-image img-circle elevation-3">
-        <span class="brand-text font-weight-light">Admin Dashboard</span>
+        <span class="brand-text font-weight-light text-decoration-none">Admin Dashboard</span>
     </a>
 
     <!-- Sidebar -->
@@ -27,7 +27,7 @@
                      alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block"><?php echo $_SESSION['email'] ?></a>
+                <a href="#" class="d-block text-decoration-none"><?php echo $_SESSION['email'] ?></a>
             </div>
         </div
         <!-- Sidebar Menu -->

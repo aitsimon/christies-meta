@@ -14,6 +14,7 @@ $('.navbarName').on('submit', function(){
             async: true
         }).done((response) => {
             let r = JSON.stringify(response);
+            sessionStorage.removeItem('productsSearchedNav');
             sessionStorage.setItem('productsSearchedNav',r);
             window.location.href = 'http://localhost/christies-meta/mvc/index.php/list';
         })

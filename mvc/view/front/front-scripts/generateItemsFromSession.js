@@ -2,7 +2,7 @@ let objects = JSON.parse(sessionStorage.getItem('productsSearchedNav'));
 if(objects!=null && objects.length> 0){
     for (const object of objects) {
         let divAccordeon = document.getElementById('accordionObjects');
-        let  divAccordeonItem = document.createElement('div');
+        let divAccordeonItem = document.createElement('div');
         divAccordeonItem.classList.add('accordion-item');
 
         let accordeonHeader = document.createElement('h2');

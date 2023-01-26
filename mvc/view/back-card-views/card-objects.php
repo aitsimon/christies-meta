@@ -38,8 +38,8 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
             <div class="form-group">
                 <label for="objectLatitude">Latitude</label>
                 <input type="number" step="any" class="form-control" id="objectLatitude" aria-describedby="latitudeHelp"
-                       placeholder="-82.14" min="-90" max="90" name="objectLatitude" value="<?php if($info['object']->getLat()!=NULL) echo $info['object']->getLat()?>">
-                <small id="latitudeHelp" class="form-text">Latitude of the object, optional.</small>
+                       placeholder="-82.14"  min="-90" max="90" name="objectLatitude" value="<?php if($info['object']->getLat()!=NULL) echo $info['object']->getLat()?>">
+                <small id="latitudeHelp"  class="form-text">Latitude of the object, optional.</small>
                 <div class="invalid-feedback">
                     Please provide a valid latitude. Number between than -90 and 90.
                 </div>

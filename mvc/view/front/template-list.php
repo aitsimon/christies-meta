@@ -73,7 +73,7 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
                         <button class="btn btn-primary" id="filterPurchasesBtn"><i class="fas fa-arrow-alt-circle-down"></i></button>
                     </div>
                     <div id="filterName" class="col-6 col-lg-2">
-                        <form class="col-12 col-lg-auto mb-3 mb-0 me-lg-3" role="search" id="navSearchForm" method="post" action="./index.php/navsearch">
+                        <form class="col-12 col-lg-auto mb-3 mb-0 me-lg-3" role="search" id="navSearchForm" method="post">
                             <input type="search" name="search" id="searchFilter" class="form-control searchInputNav" placeholder="Search by name..." aria-label="Search">
                         </form>
                     </div>

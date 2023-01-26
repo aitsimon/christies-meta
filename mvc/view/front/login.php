@@ -3,12 +3,12 @@
         <form class="row g-3 mx-auto" method="post" action="./index.php/login/process">
             <div class="form-group my-2 mx-2">
                 <label for="userEmail" class="form-label h4">Email</label>
-                <input type="email" class="form-control w-100" id="userEmail" placeholder="user@mail.com" name="userEmail">
+                <input type="email" maxlength="25" class="form-control w-100" id="userEmail" placeholder="user@mail.com" name="userEmail">
                 <small></small>
             </div>
             <div class="form-group my-2 mx-2">
                 <label for="userPassword" class="form-label h4">Password</label>
-                <input type="password" class="form-control w-100" placeholder="*************" id="userPassword" name="userPassword">
+                <input type="password" maxlength="35" class="form-control w-100" placeholder="*************" id="userPassword" name="userPassword">
                 <small></small>
             </div>
             <div class="form-group my-2 mx-2">

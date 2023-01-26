@@ -29,7 +29,7 @@
 
             <form action="login/process" method="post" id="quickForm">
                 <div class="input-group mb-3">
-                    <input type="email" id="emailI" name="email" class="form-control" placeholder="Email" required>
+                    <input type="email" id="emailI" maxlength="35" name="email" class="form-control" placeholder="Email" required>
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                    <input type="password" maxlength="40" name="password" class="form-control" placeholder="Password" required>
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -46,23 +46,16 @@
                 </div>
                 <div class="row">
                     <div class="col-8">
-                        <div class="icheck-primary">
-                            <input type="checkbox" id="remember">
-                            <label for="remember">
-                                Remember Me
-                            </label>
-                        </div>
+
                     </div>
                     <!-- /.col -->
-                    <div class="col-4">
+                    <div class="col-12">
                         <button type="submit" class="btn btn-primary btn-block">Sign In</button>
                     </div>
                     <!-- /.col -->
                 </div>
             </form>
-            <p class="mb-1">
-                <a href="forgot-password-v2.php">I forgot my password</a>
-            </p>
+
             <p class="error-msg">
                 <?php
                     if(isset($_SESSION['msg-error'])){

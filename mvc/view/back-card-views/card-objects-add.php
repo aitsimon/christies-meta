@@ -27,30 +27,30 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
             <div class="form-group">
                 <label for="objectName">Name*</label>
                 <input type="text" class="form-control vfI" id="objectName" aria-describedby="emailHelp"
-                       placeholder="object name" required name="objectName" value="">
+                       placeholder="object name" maxlength="15" required name="objectName" value="">
                 <small id="nameHelp" class="form-text text-muted">Name of the object</small>
             </div>
             <div class="form-group">
                 <label for="objectLatitude">Latitude</label>
                 <input type="number" step="any" class="form-control" id="objectLatitude" aria-describedby="latitudeHelp"
-                       placeholder="-82.14" min="-90" max="90" name="objectLatitude" value="">
+                       placeholder="-82.14" maxlength="10" min="-90" max="90" name="objectLatitude" value="">
                 <small id="latitudeHelp" class="form-text">Latitude of the object, optional.</small>
             </div>
             <div class="form-group">
                 <label for="objectLongitude">Longitude</label>
                 <input type="number" step="any" class="form-control" id="objectLongitude" aria-describedby="longitudeHelp"
-                       placeholder="60" min="-180" max="180"  name="objectLongitude" value="">
+                       placeholder="60" maxlength="10" min="-180" max="180"  name="objectLongitude" value="">
                 <small id="longitudeHelp" class="form-text">Longitude of the object, optional.</small>
             </div>
             <div class="form-group">
                 <label for="objectPrice">Price*</label>
                 <input type="number" step="any" class="form-control vfI" id="objectPrice" aria-describedby="priceHelp"
-                       placeholder="60" required name="objectPrice" value="">
+                       placeholder="60" maxlength="12" required name="objectPrice" value="">
                 <small id="priceHelp" class="form-text text-muted">Price of the object.</small>
             </div>
             <div class="form-group">
                 <label for="object-cat">Category*</label>
-                <input list="objectCategory" aria-describedby="catHelp" required class="form-control vfI w-25" id="object-cat" name="object-cat" value="">
+                <input list="objectCategory" aria-describedby="catHelp" required class="form-control w-25" id="object-cat" name="object-cat" value="">
                 <small id="catHelp" class="form-text">Select one category for the object</small>
                 <datalist id="objectCategory">
                     <?php

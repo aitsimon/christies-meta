@@ -15,7 +15,7 @@
               <li><a href="./index.php/contact" class="nav-link px-2 link-dark">Contact</a></li>
           </ul>
 
-          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 navbarName" role="search" id="navSearchForm" method="post" action="./index.php/navsearch">
+          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 navbarName" role="search" id="navSearchForm" method="post">
             <input type="search" name="search" id="search" class="form-control searchInputNav" placeholder="Search by name..." aria-label="Search">
           </form>
             <?php

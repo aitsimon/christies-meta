@@ -82,9 +82,9 @@ function checkInd(elm){
                 }
             }
             break;
-        case 'objectLongitude':
+        case 'objectLatitude':
             let regex2 = /^\d+\.?\d*$/;
-            if(regex2.test(value)&&parseFloat(value)>-90&&parseFloat(value)<90) {
+            if(regex2.test(value)&&parseFloat(value)>-90 && parseFloat(value)<90) {
                 if(element.classList.contains('is-invalid')){
                     element.classList.remove('is-invalid');
                 }

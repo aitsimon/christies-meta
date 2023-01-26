@@ -113,7 +113,7 @@
                                 <input type="hidden" name="commentObjectId" value="<?php echo $info['object']->getObjectId()?>">
                                 <div class="form-group d-flex flex-column">
                                     <label for="commentContent">Comment text: </label>
-                                    <textarea class="mt-1" name="commentContent" id="commentContent" cols="30" rows="10" placeholder="Write your comment here.."></textarea>
+                                    <textarea class="mt-1" maxlength="300" name="commentContent" id="commentContent" cols="30" rows="10" placeholder="Write your comment here.."></textarea>
                                 </div>
                                 <div class="d-flex flex-row justify-content-center align-items-center">
                                     <button type="submit" class="btn btn-lg mt-2 btn-primary" data-bs-dismiss="modal">Submit</button>

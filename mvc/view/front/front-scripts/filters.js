@@ -27,7 +27,7 @@ function insertItems (datas){
         h4Name.classList.add('col-6');
         divPriceName.appendChild(h4Name);
         let aPrice = document.createElement('a');
-        aPrice.innerText=object.price;
+        aPrice.innerText=object.price+" ₣";
         let aPriceClasses =["btn", "price-tag","col-6","my-3"];
         aPrice.classList.add(...aPriceClasses);
         divPriceName.appendChild(aPrice);
