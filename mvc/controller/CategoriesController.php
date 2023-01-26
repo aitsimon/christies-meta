@@ -19,11 +19,16 @@ class CategoriesController
         $info['title'] = 'New category';
         $this->load_view('view/back-card-views/card-categories-add.php','view/template.php',$info);
     }
+    public static function deleteDir($dirPath) {
+        array_map('unlink', glob("$dirPath/*.*"));
+        rmdir($dirPath);
+    }
     public function processCategory($action){
         require ('model/session-control.php');
         if(isset($_POST['delete'])){
             $check = DBManagerCategories::deleteCategory($_POST['categoryId']);
             if($check){
+                //self::deleteDir($_SERVER['DOCUMENT_ROOT']."/christies-meta/mvc/view/categories-images/".$_POST['categoryId']);
                 header('Location: ../categories');
             }else{
                 $_SESSION['error-message'] = 'Category could not be deleted';
@@ -34,7 +39,6 @@ class CategoriesController
             $check = true;
             $categoryName = $_POST['categoryName'];
             $categoryDescription = $_POST['categoryDescription'];
-            $_POST['categoryId'] =(string) DBManagerCategories::getNewMaxId();
 
             $mega = 1024 * 1024;
             $tam = $_FILES["categoryImg"]["size"];
@@ -44,9 +48,9 @@ class CategoriesController
                 $errorMsg.= 'Name field is empty';
                 $check = false;
             }else{
-                $regex = '/^[a-záéíóúüñç_]{2,20}$/i';
+                $regex = '/^[a-zA-Z0-9]+(?:[\s.]+[a-zA-Z0-9]+)*$/';
                 if(!preg_match($regex,$categoryName)){
-                    $errorMsg.= 'Name field invalid.Name field invalid. No numbers or special characters allowed. Min length: 2. Max length: 20. ';
+                    $errorMsg.= 'Name field invalid.Name field invalid. No special characters allowed. Min length: 2. Max length: 20. ';
                     $check = false;
                 }
             }
@@ -62,7 +66,7 @@ class CategoriesController
                 $fileName = 'main';
                 $extension = pathinfo( $_FILES["categoryImg"]["name"], PATHINFO_EXTENSION );
                 $newName = $fileName . "." . $extension;
-                mkdir($_SERVER['DOCUMENT_ROOT']."/christies-meta/mvc/view/categories-images/".$_POST['categoryId']."/{$newName}", 0777, true);
+                mkdir($_SERVER['DOCUMENT_ROOT']."/christies-meta/mvc/view/categories-images/".$_POST['categoryId']."/", 0777, true);
                 $path = $_SERVER['DOCUMENT_ROOT']."/christies-meta/mvc/view/categories-images/".$_POST['categoryId']."/{$newName}";
                 $absolutePath= __DIR__ .'/'.$path;
                 if(!file_exists($absolutePath)){
@@ -81,7 +85,8 @@ class CategoriesController
                 $_SESSION['error-message'] = $errorMsg;
             }
             if(!$check2){
-                $this->addCategory();
+                header("Location: ../categories/add");
+
             }else{
                 header("Location: ../categories");
             }
@@ -102,8 +107,8 @@ class CategoriesController
                 $errorMsg.= 'Name field is empty';
                 $check = false;
             }else{
-                $regex = '/^[a-záéíóúüñç_]{2,20}$/i';
-                if(!preg_match($regex,$categoryName)){
+                $regex = '/^[a-zA-Z0-9]+(?:[\s.]+[a-zA-Z0-9]+)*$/';
+                if(!preg_match($regex,$categoryName) || strlen($categoryName)>20){
                     $errorMsg.= 'Name field invalid.Name field invalid. No numbers or special characters allowed. Min length: 2. Max length: 20. ';
                     $check = false;
                 }
@@ -135,7 +140,8 @@ class CategoriesController
             }else{
                 $_SESSION['error-message'] = $errorMsg;
             }
-            $this->viewCategory($catId);
+            header("Location: ../categories/".$catId);
+
         }
     }
 }

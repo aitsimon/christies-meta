@@ -47,4 +47,7 @@ if($action === 'searchProducts'){
 }else if($action ==='productsUser'){
     $categories = DBManagerObject::getAllPurchasedObjectsByUser($_POST['user']);
     echo json_encode($categories);
+}else if($action ==='productsMap'){
+    $categories = DBManagerObject::getObjectsTrip();
+    echo json_encode($categories);
 }

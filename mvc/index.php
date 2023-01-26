@@ -96,6 +96,8 @@ if (isset($array_path[0]) && $array_path[0] === 'admin' && $array_path[1] === 'l
         }
     }else if(isset($array_path[0]) && $array_path[0]==='categories'){
         $front_controller->showCategories();
+    }else if(isset($array_path[0]) && $array_path[0]==='map'){
+        $front_controller->showMap();
     }else if(isset($array_path[0]) && $array_path[0]==='logout'){
         $front_controller->logout();
      }

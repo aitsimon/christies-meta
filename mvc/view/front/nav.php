@@ -1,8 +1,3 @@
-<?php
-if(isset($_SESSION['front-userId'])){
-    var_dump(DBManagerUsers::getUserById($_SESSION['front-userId']));
-}
-?>
 <link rel="stylesheet" href="view/front/styles/nav.css">
 <div class="headerr">
     <header class="p-3 mb-3 border-bottom d-none d-lg-block">
@@ -16,6 +11,7 @@ if(isset($_SESSION['front-userId'])){
             <li><a href="./index.php/home" class="nav-link px-2 link-dark">Home</a></li>
             <li><a href="./index.php/list" class="nav-link px-2 link-dark">List</a></li>
               <li><a href="./index.php/categories" class="nav-link px-2 link-dark">Categories</a></li>
+              <li><a href="./index.php/map" class="nav-link px-2 link-dark">Map</a></li>
               <li><a href="./index.php/contact" class="nav-link px-2 link-dark">Contact</a></li>
           </ul>
 
@@ -55,7 +51,9 @@ if(isset($_SESSION['front-userId'])){
           <ul class="dropdown-menu text-small shadow ">
             <li><a href="./index.php/home" class="nav-link px-2 link-secondary">Home</a></li>
             <li><a href="./index.php/list" class="nav-link px-2 link-dark">List</a></li>
-            <li><a href="./index.php/contact" class="nav-link px-2 link-dark">Contact</a></li>
+              <li><a href="./index.php/categories" class="nav-link px-2 link-dark">Categories</a></li>
+              <li><a href="./index.php/map" class="nav-link px-2 link-dark">Map</a></li>
+              <li><a href="./index.php/contact" class="nav-link px-2 link-dark">Contact</a></li>
           </ul>
         </div>
 

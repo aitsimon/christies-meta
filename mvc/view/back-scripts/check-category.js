@@ -41,30 +41,24 @@ function dateIsValid(date) {
 function comprobar(evt) {
     var elemento = evt.currentTarget;
     var name = elemento.name;
+    let valor = elemento.value;
     var smallError = elemento.nextElementSibling;
     switch (name) {
         case 'categoryName':
-            let patron = /^[a-záéíóúüñç_]{2,20}$/i;
-            let nameEntered = elemento.value;
-            if(patron.test(nameEntered)) {
+            let patron = /^[a-zA-Z0-9]+(?:[\s.]+[a-zA-Z0-9]+)*$/g;
+            if(patron.test(valor) && valor.length>=3) {
                 smallError.innerHTML='';
             }else{
-                smallError.innerHTML='Name field invalid. No numbers or special characters allowed. Min length: 2. Max length: 20.';
+                smallError.innerHTML='Name field invalid. No special characters allowed. Min length: 2. Max length: 20.';
             }
             break;
         case 'categoryDescription':
+            let patron2 = /^[a-zA-Z0-9]+(?:[\s.]+[a-zA-Z0-9]+)*$/g;
             let descriptionEntered = elemento.value;
-            if(descriptionEntered.length<800){
+            if(patron2.test(descriptionEntered) && descriptionEntered.length<600){
                 smallError.innerHTML='';
             }else{
                 smallError.innerHTML='Description max length 1000 characters.'
-            }
-            break;
-        case 'userTokens':
-            if (typeof (eval(elemento.value))==='number') {
-                smallError.innerHTML = '';
-            } else {
-                smallError.innerHTML = 'Tokens must be a number.';
             }
             break;
     }

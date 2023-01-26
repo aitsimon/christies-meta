@@ -115,9 +115,9 @@ class ObjectController
                 $_SESSION['error-message'] = $errorMsg;
             }
             if(!$check2){
-                $this->addObject();
+                //header("Location: ../products/add");
             }else{
-                header("Location: ../products");
+                //header("Location: ../products");
             }
 
         }else{
@@ -204,7 +204,6 @@ class ObjectController
 
                 DBManagerObject::updateObject($objectId,$objectName,$objectLatitude,$objectLongitude,$objectPrice,$objectImg1,$objectImg2,$objectImg3,$objectCategory);
             }else{
-                echo 'jh';
                 $_SESSION['error-message'] = $errorMsg;
             }
             //header("Location: ../products/".$objectId);

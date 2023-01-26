@@ -26,7 +26,7 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
             <input type="hidden" id="objectId" name="objectId" value="">
             <div class="form-group">
                 <label for="objectName">Name*</label>
-                <input type="text" class="form-control" id="objectName" aria-describedby="emailHelp"
+                <input type="text" class="form-control vfI" id="objectName" aria-describedby="emailHelp"
                        placeholder="object name" required name="objectName" value="">
                 <small id="nameHelp" class="form-text text-muted">Name of the object</small>
             </div>
@@ -44,13 +44,13 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
             </div>
             <div class="form-group">
                 <label for="objectPrice">Price*</label>
-                <input type="number" step="any" class="form-control" id="objectPrice" aria-describedby="priceHelp"
+                <input type="number" step="any" class="form-control vfI" id="objectPrice" aria-describedby="priceHelp"
                        placeholder="60" required name="objectPrice" value="">
                 <small id="priceHelp" class="form-text text-muted">Price of the object.</small>
             </div>
             <div class="form-group">
                 <label for="object-cat">Category*</label>
-                <input list="objectCategory" aria-describedby="catHelp" required class="form-control w-25" id="object-cat" name="object-cat" value="">
+                <input list="objectCategory" aria-describedby="catHelp" required class="form-control vfI w-25" id="object-cat" name="object-cat" value="">
                 <small id="catHelp" class="form-text">Select one category for the object</small>
                 <datalist id="objectCategory">
                     <?php

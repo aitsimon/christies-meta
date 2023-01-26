@@ -68,6 +68,24 @@ class DBManagerObject
             return $objects;
         }
     }
+    public static function getObjectsTrip()
+    {
+        $dbm = Connection::access();
+        try {
+            $clause = "SELECT * FROM object where cat_id = 1";
+            $results = $dbm->query($clause);
+            $objects = array();
+            foreach ($results as $result) {
+                $object = new Virtual_Object($result['object_id'], $result['name'], $result['lat'], $result['lon'], $result['price'], $result['img1'], $result['img2'], $result['img3'], $result['cat_id']);
+                $objects[] = $object;
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return $objects;
+        }
+    }
     public static function searchByName($name)
     {
         $dbm = Connection::access();
@@ -206,6 +224,7 @@ class DBManagerObject
             return $objects;
         }
     }
+
     public static function getLast10ObjectsCommentedByUser($user_id)
     {
         $dbm = Connection::access();

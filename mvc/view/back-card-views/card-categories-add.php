@@ -23,21 +23,21 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
         };
         ?>
         <form class="container" enctype="multipart/form-data" method="post" action="./../../../mvc/index.php/admin/dashboard/categories/process">
-            <input type="hidden" id="categoryId" name="categoryId" value="">
+            <input type="hidden" id="categoryId" name="categoryId" value="<?php echo DBManagerCategories::getNewMaxId() ?>">
             <div class="form-group">
                 <label for="categoryName">Name</label>
                 <input type="text" class="form-control" id="categoryName" aria-describedby="nameHelp"
-                       placeholder="virtual_name" required name="categoryName" value="">
+                       placeholder="virtual_name" maxlength="20" required name="categoryName" value="">
                 <small id="nameHelp" class="form-text text-muted">Name of the category</small>
             </div>
             <div class="form-group">
                 <label for="categoryDescription">Description*</label>
-                <textarea name="categoryDescription"  class="form-control" id="categoryDescription" cols="30" rows="10"></textarea>
+                <textarea name="categoryDescription" maxlength="600" class="form-control" id="categoryDescription" cols="30" rows="10"></textarea>
                 <small id="descriptionHelp" class="form-text text-muted">Description of the category</small>
             </div>
             <div class="form-group">
                 <label for="categoryImg">Img*</label>
-                <input type="file" name="categoryImg" onchange="previewFile(this)" accept="image/*" aria-describedby="imgHelp" class="form-control" id="categoryImg" value="">
+                <input type="file" required name="categoryImg" onchange="previewFile(this)" accept="image/*" aria-describedby="imgHelp" class="form-control" id="categoryImg" value="">
                 <div class="card">
                     <img src="" id="previewImg">
                 </div>

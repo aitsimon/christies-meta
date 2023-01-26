@@ -318,5 +318,9 @@ class FrontController
         }
 
     }
+    public function showMap(){
+        $info['title'] = 'Map objects';
+        $this->load_view('view/front/map.php','view/front/template-front.php',$info);
+    }
 
 }
