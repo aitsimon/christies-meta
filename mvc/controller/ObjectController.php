@@ -115,9 +115,9 @@ class ObjectController
                 $_SESSION['error-message'] = $errorMsg;
             }
             if(!$check2){
-                //header("Location: ../products/add");
+                header("Location: ../products/add");
             }else{
-                //header("Location: ../products");
+                header("Location: ../products");
             }
 
         }else{
@@ -206,7 +206,7 @@ class ObjectController
             }else{
                 $_SESSION['error-message'] = $errorMsg;
             }
-            //header("Location: ../products/".$objectId);
+            header("Location: ../products/".$objectId);
         }
     }
 }

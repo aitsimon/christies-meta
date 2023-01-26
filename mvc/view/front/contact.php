@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="form-floating mt-2 col-10">
-                <textarea class="form-control" name="userComment" maxlength="500" placeholder="Leave a comment here" id="userComment" required></textarea>
+                <textarea class="form-control" name="userComment" maxlength="400" placeholder="Leave a comment here" id="userComment" required></textarea>
                 <label for="userComment">Comments</label>
                 <div class="invalid-feedback">
                     Please enter your comment above.

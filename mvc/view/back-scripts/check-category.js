@@ -55,7 +55,7 @@ function comprobar(evt) {
         case 'categoryDescription':
             let patron2 = /^[a-zA-Z0-9]+(?:[\s.]+[a-zA-Z0-9]+)*$/g;
             let descriptionEntered = elemento.value;
-            if(patron2.test(descriptionEntered) && descriptionEntered.length<600){
+            if(patron2.test(descriptionEntered) && descriptionEntered.length<600 && descriptionEntered.length>3){
                 smallError.innerHTML='';
             }else{
                 smallError.innerHTML='Description max length 1000 characters.'
