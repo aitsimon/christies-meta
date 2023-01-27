@@ -153,7 +153,14 @@ if (isset($array_path[0]) && $array_path[0] === 'admin' && $array_path[1] === 'l
     }else if($array_path[2] === 'testing'){
         $controller->testing();
     }
-} else {
+}else if (($array_path[0] === 'admin' || $array_path[1] === '' ||  !isset($array_path[1])  || !isset($array_path[0]))||empty($array_path[0])) {
+    $uri = $_SERVER['REQUEST_URI'];
+    if ($uri[strlen($uri) - 1] === '/') {
+        header('Location:' . $_SERVER['REQUEST_URI'] . 'login');
+    } else {
+        header('Location:' . $_SERVER['REQUEST_URI'] . '/login');
+    }
+}else {
     //por defecto sino pone nada mas que index.php o index.php/ entrar front
     $controller->show404Page();
 }

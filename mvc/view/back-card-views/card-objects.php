@@ -86,12 +86,14 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
             <div class="form-group">
                 <label for="objectImg1">Principal Image*</label>
                 <input type="file" value="<?php echo $info['object']->getImg1()?>"  name="objectImg1" onchange="previewFile(this,0)" accept="image/*" aria-describedby="imgHelp" class="form-control" id="objectImg1" ">
+                <input type="hidden" id="objectImg1R" name="objectImg1R" value="<?php echo $info['object']->getImg1()?>">
                 <div class="card container col-4">
                     <img src="<?php echo $info['object']->getImg1()?>" alt="Image of the product" id="previewImg0" class="prev-img img-fluid">
                 </div>
             </div>
             <div class="form-group">
                 <label for="objectImg2">Additional Image 2</label>
+                <input type="hidden" id="objectImg2R" name="objectImg2R" value="<?php if($info['object']->getImg2()!==''||$info['object']->getImg2()!=''){ echo $info['object']->getImg2(); }?>">
                 <input type="file" name="objectImg2" onchange="previewFile(this,1)" accept="image/*" aria-describedby="imgHelp2" class="form-control" id="objectImg2" value="<?php if($info['object']->getImg2()!=NULL&&$info['object']->getImg2()!=''){echo $info['object']->getImg2();}?>">
                 <div class="container col-4">
                     <img src="<?php if($info['object']->getImg2()!=NULL&&$info['object']->getImg2()!=''){echo $info['object']->getImg2();}?>" alt='Image of the product' id='previewImg1' class="prev-img img-fluid">
@@ -99,6 +101,7 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
             </div>
             <div class="form-group ">
                 <label for="objectImg3">Additional Image 3</label>
+                <input type="hidden" id="objectImg3R" name="objectImg3R" value="<?php if($info['object']->getImg3()!==''||$info['object']->getImg3()!=''){ echo $info['object']->getImg3(); }?>">
                 <input type="file" name="objectImg3" onchange="previewFile(this,2)" accept="image/*" aria-describedby="imgHelp" class="form-control" id="objectImg3" value="<?php if($info['object']->getImg3()!=NULL&&$info['object']->getImg3()!=''){echo $info['object']->getImg3();}?>">
                 <div class="container col-4">
                     <img <?php if($info['object']->getImg3()!=NULL&&$info['object']->getImg3()!=''){echo "src='".$info['object']->getImg3()."'"; };?> alt='Image of the product' id='previewImg2' class="prev-img img-fluid">

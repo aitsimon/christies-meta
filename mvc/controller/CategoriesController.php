@@ -28,7 +28,7 @@ class CategoriesController
         if(isset($_POST['delete'])){
             $check = DBManagerCategories::deleteCategory($_POST['categoryId']);
             if($check){
-                //self::deleteDir($_SERVER['DOCUMENT_ROOT']."/christies-meta/mvc/view/categories-images/".$_POST['categoryId']);
+                //system("rm -rf ".escapeshellarg($_SERVER['DOCUMENT_ROOT']."/christies-meta/mvc/view/categories-images/".$_POST['categoryId']));
                 header('Location: ../categories');
             }else{
                 $_SESSION['error-message'] = 'Category could not be deleted';
@@ -101,7 +101,6 @@ class CategoriesController
 
             $mega = 1024 * 1024;
             $tam = $_FILES["categoryImg"]["size"];
-            $nombreArchivo = $_FILES["archivo"]["name"];
 
             if($categoryName===''){
                 $errorMsg.= 'Name field is empty';
@@ -117,23 +116,27 @@ class CategoriesController
                 $errorMsg.= 'Description max length 1000.';
                 $check = false;
             }
-            if ($tam > 8 * $mega) {  //1024 bytes = 1KB =>1024*1024=1MB
-                $errorMsg = "Archivo muy grande";
-                $check =false;
-            } else {
-                $temporal = $_FILES["categoryImg"]["tmp_name"];
-                $fileName = 'main';
-                $extension = pathinfo( $_FILES["categoryImg"]["name"], PATHINFO_EXTENSION );
-                $newName = $fileName . "." . $extension;
-                $path = $_SERVER['DOCUMENT_ROOT']."/christies-meta/mvc/view/categories-images/".$_POST['categoryId']."/{$newName}";
-                $absolutePath= __DIR__ .'/'.$path;
-                if(!file_exists($absolutePath)){
-                    move_uploaded_file($temporal, $path);
-                    $categoryImg="http://localhost/christies-meta/mvc/view/categories-images/".$_POST['categoryId']."/{$newName}";
-                }else{
-                    $errorMsg.= "Archivo no enviado, ya existe";
-                    $categoryImg =$_POST['categoryImg'];
+            if($_FILES['categoryImg']["tmp_name"]!==''){
+                if ($tam > 8 * $mega) {  //1024 bytes = 1KB =>1024*1024=1MB
+                    $errorMsg = "Archivo muy grande";
+                    $check =false;
+                } else {
+                    $temporal = $_FILES["categoryImg"]["tmp_name"];
+                    $fileName = 'main';
+                    $extension = pathinfo( $_FILES["categoryImg"]["name"], PATHINFO_EXTENSION );
+                    $newName = $fileName . "." . $extension;
+                    $path = $_SERVER['DOCUMENT_ROOT']."/christies-meta/mvc/view/categories-images/".$_POST['categoryId']."/{$newName}";
+                    $absolutePath= __DIR__ .'/'.$path;
+                    if(!file_exists($absolutePath)){
+                        move_uploaded_file($temporal, $path);
+                        $categoryImg="http://localhost/christies-meta/mvc/view/categories-images/".$_POST['categoryId']."/{$newName}";
+                    }else{
+                        $errorMsg.= "Archivo no enviado, ya existe";
+                        $categoryImg =$_POST['categoryImg'];
+                    }
                 }
+            }else{
+                $categoryImg = $_POST['categoryImgR'];
             }
             if($check){
                 DBManagerCategories::updateCategory($catId,$categoryName,$categoryDescription,$categoryImg);

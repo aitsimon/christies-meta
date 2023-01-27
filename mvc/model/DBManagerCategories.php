@@ -64,9 +64,9 @@ class DBManagerCategories
         $dbm = Connection::access();
         try {
             $check = false;
-            $clause = "INSERT INTO categories (name, description, img) VALUES ( ?, ?, ?) ";
+            $clause = "INSERT INTO categories (cat_id ,name, description, img) VALUES (?, ?, ?, ?) ";
             $stmt = $dbm->prepare($clause);
-            if ($stmt->execute([$name, $description, $img])) {
+            if ($stmt->execute([DBManagerCategories::getNewMaxId(),$name, $description, $img])) {
                 $check = true;
             }
         } catch (PDOException $e) {

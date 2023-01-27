@@ -68,6 +68,20 @@ class DBManagerObject
             return $objects;
         }
     }
+    public static function getNewMaxId(){
+        $dbm = Connection::access();
+        try {
+            $clause = 'SELECT MAX(object_id) FROM object';
+            $stmt = $dbm->query($clause);
+            $result = $stmt->fetch();
+            $newId =(int)$result[0]+1;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        } finally {
+            $dbm = null;
+            return $newId;
+        }
+    }
     public static function getObjectsTrip()
     {
         $dbm = Connection::access();
@@ -123,9 +137,9 @@ class DBManagerObject
         $dbm = Connection::access();
         try {
             $check = false;
-            $clause = "INSERT INTO object (name, lat, lon, price, img1, img2, img3, cat_id) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?) ";
+            $clause = "INSERT INTO object (object_id,name, lat, lon, price, img1, img2, img3, cat_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) ";
             $stmt = $dbm->prepare($clause);
-            if ($stmt->execute([$name, $lat, $lon, $price, $img1, $img2, $img3, $cat_id])) {
+            if ($stmt->execute([DBManagerObject::getNewMaxId(),$name, $lat, $lon, $price, $img1, $img2, $img3, $cat_id])) {
                 $check = true;
             }
         } catch (PDOException $e) {
@@ -184,21 +198,6 @@ class DBManagerObject
         } finally {
             $dbm = null;
             return $check;
-        }
-    }
-
-    public static function getNewMaxId(){
-        $dbm = Connection::access();
-        try {
-            $clause = 'SELECT MAX(object_id) FROM object';
-            $stmt = $dbm->query($clause);
-            $result = $stmt->fetch();
-            $newId =(int)$result[0]+1;
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        } finally {
-            $dbm = null;
-            return $newId;
         }
     }
     public static function getAllPurchasedObjectsByUser($user_id)

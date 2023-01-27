@@ -115,9 +115,9 @@ class ObjectController
                 $_SESSION['error-message'] = $errorMsg;
             }
             if(!$check2){
-                //header("Location: ../products/add");
+                header("Location: ../products/add");
             }else{
-                //header("Location: ../products");
+                header("Location: ../products");
             }
 
         }else{
@@ -176,37 +176,42 @@ class ObjectController
             }else{
                 $check = false;
             }
-            if(isset($objectImg2)){
-                $temporal2 = $_FILES["objectImg2"]["tmp_name"];
-                $fileName2 = $objectId."_2";
-                $extension2 = pathinfo( $_FILES["objectImg2"]["name"], PATHINFO_EXTENSION );
-                $newName2 = $fileName2 . "." . $extension2;
-                $path2 = $_SERVER['DOCUMENT_ROOT']."/christies-meta/mvc/view/categories-images/".$_POST['object-cat']."/{$newName2}";
-                if(move_uploaded_file($temporal2, $path2)|| file_exists($path2)){
-                    $objectImg2="http://localhost/christies-meta/mvc/view/categories-images/".$_POST['object-cat']."/{$newName2}";
+                if($_FILES['objectImg2']["tmp_name"]!==''||$_FILES['objectImg2']["tmp_name"]!==null) {
+                    $temporal2 = $_FILES["objectImg2"]["tmp_name"];
+                    $fileName2 = $objectId . "_2";
+                    $extension2 = pathinfo($_FILES["objectImg2"]["name"], PATHINFO_EXTENSION);
+                    $newName2 = $fileName2 . "." . $extension2;
+                    $path2 = $_SERVER['DOCUMENT_ROOT'] . "/christies-meta/mvc/view/categories-images/" . $_POST['object-cat'] . "/{$newName2}";
+                    if (move_uploaded_file($temporal2, $path2) || file_exists($path2)) {
+                        $objectImg2 = "http://localhost/christies-meta/mvc/view/categories-images/" . $_POST['object-cat'] . "/{$newName2}";
+                    } else {
+                        $objectImg2 = NULL;
+                    }
                 }else{
-                    $objectImg2 = NULL;
+                    $objectImg2 = $_POST['objectImg2R'];
                 }
-            }
-            if(isset($objectImg3)){
-                $temporal3 = $_FILES["objectImg3"]["tmp_name"];
-                $fileName3 = $objectId."_3";
-                $extension3 = pathinfo( $_FILES["objectImg3"]["name"], PATHINFO_EXTENSION );
-                $newName3 = $fileName3 . "." . $extension3;
-                $path3 = $_SERVER['DOCUMENT_ROOT']."/christies-meta/mvc/view/categories-images/".$_POST['object-cat']."/{$newName3}";
-                if(move_uploaded_file($temporal3, $path3)|| file_exists($path3)){
-                    $objectImg3="http://localhost/christies-meta/mvc/view/categories-images/".$_POST['object-cat']."/{$newName3}";
+
+                if($_FILES['objectImg2']["tmp_name"]!==''||$_FILES['objectImg2']["tmp_name"]!==null) {
+                    $temporal3 = $_FILES["objectImg3"]["tmp_name"];
+                    $fileName3 = $objectId . "_3";
+                    $extension3 = pathinfo($_FILES["objectImg3"]["name"], PATHINFO_EXTENSION);
+                    $newName3 = $fileName3 . "." . $extension3;
+                    $path3 = $_SERVER['DOCUMENT_ROOT'] . "/christies-meta/mvc/view/categories-images/" . $_POST['object-cat'] . "/{$newName3}";
+                    if (move_uploaded_file($temporal3, $path3) || file_exists($path3)) {
+                        $objectImg3 = "http://localhost/christies-meta/mvc/view/categories-images/" . $_POST['object-cat'] . "/{$newName3}";
+                    } else {
+                        $objectImg2 = NULL;
+                    }
                 }else{
-                    $objectImg2=NULL;
+                    $objectImg3 = $_POST['objectImg3R'];
                 }
-            }
             if($check){
 
                 DBManagerObject::updateObject($objectId,$objectName,$objectLatitude,$objectLongitude,$objectPrice,$objectImg1,$objectImg2,$objectImg3,$objectCategory);
             }else{
                 $_SESSION['error-message'] = $errorMsg;
             }
-            //header("Location: ../products/".$objectId);
+            header("Location: ../products/".$objectId);
         }
     }
 }

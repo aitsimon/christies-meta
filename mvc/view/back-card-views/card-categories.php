@@ -44,6 +44,7 @@ for ($i = 0, $iMax = count($component); $i < $iMax; $i++) {
             </div>
             <div class="form-group">
                 <label for="category-Upper">Category Upper Id*</label>
+                <input type="hidden" id="categoryImgR" name="categoryImgR" value="<?php echo $info['category']->getImg() ?>">
                 <input list="categoryUpper" aria-describedby="categoryUpperHelp" required class="form-control w-25" id="category-Upper" name="category-Upper" value="<?php echo $info['category']->getCatId()?>">
                 <datalist id="categoryUpper">
                 <?php
