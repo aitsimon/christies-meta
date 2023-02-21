@@ -1,2 +1,1 @@
-# christies-meta
-Proyecto Integrador
+Ecommerce with MVC based back. Wordpress style back administration to manage the items showed on the front of the ecommerce shop. Languages and technologies used in this project: PHP, JS, CSS, HTML, AJAX, Jquery, SQL, Datatables, Bootstrap, Leaflet, XAMPP based Server and MariaDB.
